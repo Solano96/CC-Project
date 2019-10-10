@@ -1,2 +1,2 @@
 # CC-Project-Trading
-Project for the subject of cloud computing
+Project for the subject of cloud computing.
