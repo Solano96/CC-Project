@@ -5,7 +5,7 @@ Project for the subject of cloud computing.
 
 In this project we are going to create an application in cloud for simulation in the stock exchange. This application will allow you to create purchase and sale orders in the market and record the current status of the portfolio.
 
-For simplicity in this application all purchase and sale orders that are carried out will be executed at the closing market price.
+For simplicity in this application all purchase and sale orders that are carried out will be executed at the closing market price and the collection of commissions for each order carried out will not be considered..
 
 
 ### Architecture
