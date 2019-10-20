@@ -2,6 +2,15 @@
 
 * Descarga de **git** para usarlo desde la línea de órdenes.
 
+		sudo apt update
+		sudo apt install git
+
+	Para ver la versión instalada:
+
+		git --version
+		Output
+		git version 2.17.1
+
 * Creación de par de claves y subida de clave pública a GitHub.
 
 	![](img/hito0/ssh_key.png)
