@@ -18,7 +18,7 @@
 
 El objetivo que se persigue en este proyecto es el de crear una aplicación en la nube que sirva de simulador de bolsa y de esta forma los usuarios puedan invertir sin el riesgo de perder dinero real.  Esta aplicación permitirá crear ordenes de compra y venta en el mercado y poder llevar un registro de la cartera del usuario.
 
-Por simplicidad todas las compras y ventas llevadas a cabo, serán ejecutadas al precio del mercado en el momento de ejecutar la orden y estas se
+Por simplicidad todas las compras y ventas llevadas a cabo, serán ejecutadas al precio del mercado en el momento de ejecutar la orden y estas ejecutarán inmediatamente después de su creación.
 
 ## Arquitectura
 
