@@ -51,6 +51,8 @@ Se dispondrá de una base de datos para cada microservicio, excepto para el de g
 
 ## Tecnologías
 
+Para la implementación de los microservicios se considerará el uso de varios lenguajes de programación como Ruby y Python, aunque es posible que durante el desarrollo de alguno de los microservicios se opte por usar algún otro lenguaje distinto a los mencionados. Se procurará que cada microservicio se implemente en un lenguaje diferente y siempre teniendo en cuenta que la elección del lenguaje sea adecuada a cada microservicio.
+
 Respecto a las tecnologías que usaremos para las bases de datos, se considerará el uso de una base de datos relacional para la gestión de usuarios, como por ejemplo el sistema de gestión de base de datos MySQL. Para las bases de datos correspondientes a la gestión de la cuenta y la gestión de ordenes se optará por el uso de una base de datos no relacional, como puede ser el caso de MongoDB.
 
 ## Licencia
