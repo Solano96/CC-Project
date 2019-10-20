@@ -34,7 +34,7 @@ Los microservicios considerados serán los siguientes:
 	2. Dar de baja usuarios.
 	3. Inicio de sesión.
 
-* **Gestión de la cuenta.** Este microservicio gestionará la cuenta del usuario, guardando información como el dinero en la cuenta o las acciones que posee el usuario. Entre las funcionalidades de este servicio podemos encontrar las siguientes:
+* **Gestión de la cuenta.** Este microservicio gestionará la cuenta del usuario. Entre las funcionalidades de este servicio podemos encontrar las siguientes:
 
 	1. Consultar saldo de la cuenta.
 	2. Consultar acciones compradas.
