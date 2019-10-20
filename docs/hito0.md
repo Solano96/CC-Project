@@ -18,5 +18,5 @@
 * Incrementar la seguridad de nuestra cuenta en GitHub activando el segundo factor de autenticación.
 
 	![](img/hito0/two_factor.png)
-	
-	![](img/hito0/google_authenticator.jpg)
+
+	<img src="img/hito0/google_authenticator.jpg" width="350">
