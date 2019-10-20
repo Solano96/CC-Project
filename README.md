@@ -1,5 +1,19 @@
 # Proyecto para la asignatura Cloud Computing
 
+## Índice de contenidos
+
+<!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Índice de contenidos](#ndice-de-contenidos)
+- [Descripción](#descripcin)
+- [Arquitectura](#arquitectura)
+	- [Microservicios](#microservicios)
+	- [Bases de datos](#bases-de-datos)
+- [Tecnologías](#tecnologas)
+- [Licencia](#licencia)
+
+<!-- /TOC -->
+
 ## Descripción
 
 En este proyecto se va a crear una aplicación en la nube para simulación en la bolsa de valores. Esta aplicación permitirá crear ordenes de compra y venta en el mercado y poder llevar un registro de la cartera del usuario.
@@ -8,7 +22,11 @@ Por simplicidad todas las compras y ventas llevadas a cabo, serán ejecutadas al
 
 ## Arquitectura
 
-La aplicación estará basada en microservicios. Los microservicios considerados serán los siguientes:
+La aplicación tendrá una arquitectura basada en microservicios, lo cual nos permitirá implementar los diferentes servicios de forma independiente.
+
+### Microservicios
+
+Los microservicios considerados serán los siguientes:
 
 * **Gestión de usuarios.** Este microservicio se encargará de la gestión de los usuarios, realizando funcionalidades como el registro de nuevos usuarios o el inicio de sesión.
 
@@ -21,7 +39,7 @@ La aplicación estará basada en microservicios. Los microservicios considerados
 
 ![](docs/img/architectureDiagram.png)
 
-#### Bases de datos
+### Bases de datos
 
 Se dispondrá de una base de datos para cada microservicio, excepto para el de gestión de cotizaciones. Las bases de datos serán las siguientes:
 
