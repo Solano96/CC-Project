@@ -1,5 +1,4 @@
-# CC-Project-Trading
-Proyecto para la asignatura Cloud Computing
+# Proyecto para la asignatura Cloud Computing
 
 ## Descripción
 
@@ -34,7 +33,7 @@ Se dispondrá de una base de datos para cada microservicio, excepto para el de g
 
 ## Tecnologías
 
-Respecto a las tecnologías que usaremos para las bases de datos, se considerará el uso de una base de datos relacional para la gestión de usuarios, como por ejemplo el sistema de gestión de base de datos MySQL. Para las bases de datos correspondientes a la gestión de la cuenta y la gestión de ordenes se optará por el uso de una base de datos no relacional, como puede ser el caso de MongoDB. 
+Respecto a las tecnologías que usaremos para las bases de datos, se considerará el uso de una base de datos relacional para la gestión de usuarios, como por ejemplo el sistema de gestión de base de datos MySQL. Para las bases de datos correspondientes a la gestión de la cuenta y la gestión de ordenes se optará por el uso de una base de datos no relacional, como puede ser el caso de MongoDB.
 
 ## Licencia
 
