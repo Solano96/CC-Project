@@ -73,7 +73,7 @@ En el diagrama podemos ver que el cliente se comunicará con los microservicios 
 
 ## Tecnologías
 
-Para la implementación del API Gateway se utilizará el lenguaje de programación Go. Los microservicios serán implementados en Ruby con el framework sinatra, a excepción del microservicio de gestión de cotizaciones el cual se implementará en Python con el framework Flask. Para la comunicación entre los microservicios se utilizará RabbitMQ como broker de mensajería.
+Para la implementación del API Gateway se utilizará el lenguaje de programación Go. Los microservicios serán implementados en Ruby con el framework Sinatra, a excepción del microservicio de gestión de cotizaciones el cual se implementará en Python con el framework Flask. Para la comunicación entre los microservicios se utilizará RabbitMQ como broker de mensajería.
 
 Respecto a las tecnologías que usaremos para las bases de datos, se considerará el uso de una base de datos relacional para la gestión de usuarios, en concreto se va a utilizar el sistema de gestión de base de datos PostgreSQL. Para las bases de datos correspondientes a la gestión de la cuenta y la gestión de ordenes se optará por el uso de una base de datos no relacional, en este caso se ha optado por MongoDB.
 
