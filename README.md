@@ -16,7 +16,7 @@
 
 ## Descripción
 
-En este proyecto se va a crear una aplicación aplicación desplegable en la nube, que sirva de simulador de bolsa.  Esta aplicación permitirá crear ordenes de compra y venta en el mercado y poder llevar un registro de la cartera del usuario.
+En este proyecto se va a crear una aplicación desplegable en la nube, que sirva de simulador de bolsa.  Esta aplicación permitirá crear ordenes de compra y venta en el mercado y poder llevar un registro de la cartera del usuario.
 
 Por simplicidad todas las compras y ventas llevadas a cabo, serán ejecutadas al precio del mercado en el momento de ejecutar la orden y estas ejecutarán inmediatamente después de su creación.
 
@@ -69,11 +69,11 @@ En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
 ![](docs/img/architectureDiagram.png)
 
-En el diagrama podemos ver que el cliente se comunicará con los microservicios mediante un API Gateway que enrutará las peticiones de los clientes a los servicios. Además aunque no se puede ver en el diagrama tanto el API Gateway como los microservicios dispondrán de un sistema de logs para tener un registro de los eventos.
+En el diagrama podemos ver que el cliente se comunicará con los microservicios mediante un API Gateway que enrutará las peticiones de los clientes a los servicios. Se puede apreciar también que hay un sistema de registro centralizado, al igual que el almacén de configuración etcd.
 
 ## Tecnologías
 
-Para la implementación del API Gateway se utilizará el lenguaje de programación Go. Los microservicios serán implementados en Ruby con el framework Sinatra, a excepción del microservicio de gestión de cotizaciones el cual se implementará en Python con el framework Flask. Para la comunicación entre los microservicios se utilizará RabbitMQ como broker de mensajería.
+Para la implementación del API Gateway se utilizará el lenguaje de programación Go. Los microservicios serán implementados en Ruby con el framework Sinatra, a excepción del microservicio de gestión de cotizaciones el cual se implementará en Python con el framework Flask. La comunicación entre los microservicios se hará de forma asíncrona basada en mensajes, utilizando  RabbitMQ como broker de mensajería.
 
 Respecto a las tecnologías que usaremos para las bases de datos, se considerará el uso de una base de datos relacional para la gestión de usuarios, en concreto se va a utilizar el sistema de gestión de base de datos PostgreSQL. Para las bases de datos correspondientes a la gestión de la cuenta y la gestión de ordenes se optará por el uso de una base de datos no relacional, en este caso se ha optado por MongoDB.
 
