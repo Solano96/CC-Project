@@ -16,9 +16,11 @@
 
 ## Descripción
 
-El objetivo que se persigue en este proyecto es el de crear una aplicación en la nube que sirva de simulador de bolsa y de esta forma los usuarios puedan invertir sin el riesgo de perder dinero real.  Esta aplicación permitirá crear ordenes de compra y venta en el mercado y poder llevar un registro de la cartera del usuario.
+En este proyecto se va a crear una aplicación aplicación desplegable en la nube, que sirva de simulador de bolsa.  Esta aplicación permitirá crear ordenes de compra y venta en el mercado y poder llevar un registro de la cartera del usuario.
 
 Por simplicidad todas las compras y ventas llevadas a cabo, serán ejecutadas al precio del mercado en el momento de ejecutar la orden y estas ejecutarán inmediatamente después de su creación.
+
+Esta aplicación tiene como objetivo que los usuarios que la utilicen puedan invertir en bolsa con dinero ficticio y de esta forma puedan jugar en bolsa, sin el riesgo de perder dinero real. Además será de gran utilidad para principiantes que quieran aprender, sin el peligro de perder sus ahorros.
 
 ## Arquitectura
 
@@ -27,6 +29,12 @@ La aplicación tendrá una arquitectura basada en microservicios, lo cual nos pe
 ### Microservicios
 
 Los microservicios considerados serán los siguientes:
+
+* **Gestión de usuarios.** Este microservicio se encargará de la gestión de los usuarios, realizando funcionalidades como el registro de nuevos usuarios o el inicio de sesión. Algunas de las funcionalidades de este microservicio son las siguientes:
+
+	1. Dar de alta usuarios.
+	2. Dar de baja usuarios.
+	3. Inicio de sesión.
 
 * **Gestión de la cuenta.** Este microservicio gestionará la cuenta del usuario. Entre las funcionalidades de este servicio podemos encontrar las siguientes:
 
@@ -51,19 +59,25 @@ Los microservicios considerados serán los siguientes:
 
 Se dispondrá de una base de datos para cada microservicio, excepto para el de gestión de cotizaciones. Las bases de datos serán las siguientes:
 
+* Base de datos para la gestión de usuarios. En esta base de datos se almacenarán los nombres de usuarios y las contraseñas asociadas.
+
 * Base de datos para la gestión de la cuenta. En esta base de datos se almacenará información sobre la cartera de los usuarios y las acciones de las que disponen.
 
 * Base de datos para la gestión de ordenes. En esta base de datos se almacenará un historial de todas las ordenes de compra o venta llevadas a cabo por el usuario, así como las ordenes fallidas.
 
-En la siguiente ilustración podemos ver un diagrama de la arquitectura descrita.
+En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
 ![](docs/img/architectureDiagram.png)
 
+En el diagrama podemos ver que el cliente se comunicará con los microservicios mediante un API Gateway que enrutará las peticiones de los clientes a los servicios.
+
 ## Tecnologías
+
+Para la implementación del API Gateway se utilizará el lenguaje de programación Go. Los microservicios serán implementados en Ruby con el framework sinatra, a excepción del microservicio de gestión de cotizaciones el cual se implementará en Python con el framework Flask.
 
 Para la implementación de los microservicios se considerará el uso de varios lenguajes de programación como Ruby y Python, aunque es posible que durante el desarrollo de alguno de los microservicios se opte por usar algún otro lenguaje distinto a los mencionados. Se procurará que cada microservicio se implemente en un lenguaje diferente y siempre teniendo en cuenta que la elección del lenguaje sea adecuada a cada microservicio.
 
- Para las bases de datos correspondientes a la gestión de la cuenta y la gestión de ordenes se optará por el uso de una base de datos no relacional, como puede ser el caso de MongoDB.
+Respecto a las tecnologías que usaremos para las bases de datos, se considerará el uso de una base de datos relacional para la gestión de usuarios, en concreto se va a utilizar el sistema de gestión de base de datos PostgreSQL. Para las bases de datos correspondientes a la gestión de la cuenta y la gestión de ordenes se optará por el uso de una base de datos no relacional, en este caso se ha optado por MongoDB.
 
 ## Licencia
 
