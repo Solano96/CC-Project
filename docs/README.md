@@ -19,7 +19,7 @@ La aplicación tendrá una arquitectura basada en microservicios, lo cual nos pe
 
 A continuación se exponen las entidades del sistema y cada una de las cuales se corresponderá con un microservicio.
 
-* **Portfolio.** Un portfolio en bolsa es una agrupación de activos financieros, en nuestro proyecto tan solo estará formado por el saldo disponible y las acciones compradas. Las funcionalidades de esta entidad son las siguientes:
+* `Portfolio`. Un portfolio en bolsa es una agrupación de activos financieros, en nuestro proyecto tan solo estará formado por el saldo disponible y las acciones compradas. Las funcionalidades de esta entidad son las siguientes:
 
 	* Creación de un nuevo portfolio.
 	* Dar de baja un portfolio.
@@ -30,7 +30,7 @@ A continuación se exponen las entidades del sistema y cada una de las cuales se
 	* Vender acciones de un portfolio.
 
 
-* **Mercado**. Esta entidad está formada por el nombre del mercado y la información de la cotización del mercado, está incluye el precio de apertura, cierre, mínimo y máximo, además del volumen del periodo. También se incluye la fecha y hora en la que se actualizó las información. Las funcionalidades son las siguientes:
+* `Mercado`. Esta entidad está formada por el nombre del mercado y la información de la cotización del mercado, está incluye el precio de apertura, cierre, mínimo y máximo, además del volumen del periodo. También se incluye la fecha y hora en la que se actualizó las información. Las funcionalidades son las siguientes:
 
 	* Añadir un nuevo mercado.
 	* Eliminar mercado.
@@ -42,3 +42,7 @@ A continuación se exponen las entidades del sistema y cada una de las cuales se
 En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
 ![](img/architectureDiagram.png)
+
+## Tecnologías
+
+El microservicio `Mercado` será implementado en Python, debido a la facilidad de este lenguaje y además dispone de la biblioteca *yfinance*, la cual nos permite obtener de manera sencilla datos financieros de Yahoo Finance.
