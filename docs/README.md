@@ -14,16 +14,24 @@ A continuación se exponen las entidades del sistema y cada una de las cuales se
 
 * **Portfolio.** Un portfolio en bolsa es una agrupación de activos financieros, en nuestro proyecto tan solo estará formado por el saldo disponible y las acciones compradas. Las funcionalidades de esta entidad son las siguientes:
 
-	* Consultar el saldo disponible.
-	* Modificar saldo.
-	* Consultar acciones compradas.
-	* Comprar acciones.
-	* Añadir acciones.
+	* Creación de un nuevo portfolio.
+	* Dar de baja un portfolio.
+	* Consultar el saldo disponible en un portfolio.
+	* Modificar saldo de un portfolio.
+	* Consultar acciones compradas en un porfolio.
+	* Comprar acciones para añadir nuevas acciones a un portfolio.
+	* Vender acciones de un portfolio.
+
 
 * **Mercado**. Esta entidad está formada por el nombre del mercado y la información de la cotización del mercado, está incluye el precio de apertura, cierre, mínimo y máximo, además del volumen del periodo. También se incluye la fecha y hora en la que se actualizó las información. Las funcionalidades son las siguientes:
 
-	* Consultar el precio de cierre/apertura/mínimo/máximo.
-	* Consultar la hora de la última actualización.
-	* Actualizar información de la cotización. Esta funcionalidad se ejecutará de manera interna cada minuto.
+	* Añadir un nuevo mercado.
+	* Eliminar mercado.
+	* Consultar el precio de cierre/apertura/mínimo/máximo de un mercado.
+	* Consultar el volumen de un mercado.
+	* Consultar la hora de la última actualización de un mercado.
+	* Actualizar información de la cotización de un mercado. Esta funcionalidad se ejecutará de manera interna cada minuto.
+
+En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
 ![](img/architectureDiagram.png)
