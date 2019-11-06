@@ -49,7 +49,7 @@ A continuación se exponen las entidades del sistema y cada una de las cuales se
 	* Consultar la hora de la última actualización de un mercado.
 	* Actualizar información de la cotización de un mercado. Esta funcionalidad se ejecutará de manera interna cada minuto.
 
-Para comunicarse con los microservicios se dispondrá de un API Gateway. Cada microservicio implementará un API Rest y además cada uno tendrá su propia base de datos.
+Para comunicarse con los microservicios se dispondrá de un API Gateway. Cada microservicio implementará un API Rest y además cada uno tendrá su propia base de datos. También se dispondrá de un servicio de LOG centralizado y otro de configuración distribuida.
 
 En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
@@ -61,6 +61,10 @@ En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 ### Lenguaje de programación
 
 El proyecto será realizado en el lenguaje de programación **Python**. Algunos de los motivos por los que he decidido utilizar este lenguaje son: la facilidad de implementación, el requerir menos código en comparación con otros lenguajes y el disponer de cierta experiencia en este lenguaje. Una de las ventajas que nos ofrece para este proyecto, es que nos va a permitir obtener de forma sencilla datos financieros de Yahoo Finance, mediante el uso de la biblioteca [**yfinance**](https://github.com/ranaroussi/yfinance), la cual nos facilitará la implementación del microservicio `Mercado`.
+
+### API Gateway
+
+Para el API Gateway vamos a recurrir a [**Kong Gateway**](https://github.com/Kong/kong), un proyecto de código abierto muy popular para arquitecturas basadas en microservicios. Este se va a encargar del enrutamiento hacia los distintos microservicios
 
 ### Base de datos
 
