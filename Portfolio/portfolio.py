@@ -5,7 +5,7 @@ class Portfolio:
 
     def __init__(self, dni, nombre, saldo_inicial):
         self.dni = dni
-        self.name = name
+        self.nombre = nombre
         self.saldo = saldo_inicial
         self.acciones = []
 
@@ -51,7 +51,7 @@ class Portfolio:
         elif self.acciones[indice_acciones][1] < num_acciones:
             raise PortfolioException("Error: no se pueden susbtraer más acciones de las que se disponen.")
         else:
-            self.acciones[indice_acciones][1] -= num_acciones            
+            self.acciones[indice_acciones][1] -= num_acciones
 
     def __buscar_mercado(self, nombre_mercado):
         for i in range(len(self.acciones)):
