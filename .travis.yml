@@ -1,0 +1,15 @@
+language: python
+
+python:
+    - "3.6.8"
+
+before_install:
+    - invoke install
+    - pip install codecov
+
+script:
+    - invoke test
+    - pytest --cov=./
+
+after_success:
+    - codecov
