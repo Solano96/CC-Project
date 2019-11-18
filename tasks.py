@@ -33,12 +33,12 @@ def clean(c):
     folders_to_delete.append("./Portfolio/__pycache__")
     folders_to_delete.append("./Mercado/__pycache__")
 
-    for file in files_to_delete:
-        if os.path.isfile(file):
-            c.run("rm " + file)
+    for f in files_to_delete:
+        if os.path.isfile(f):
+            c.run("rm " + f)
 
-    for folder in folders_to_delete:
-        if os.path.isdir(folder):
-            c.run("rm -r " + folder)
+    for d in folders_to_delete:
+        if os.path.isdir(d):
+            c.run("rm -r " + d)
 
     print("Limpieza finalizada.")
