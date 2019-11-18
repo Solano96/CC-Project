@@ -9,7 +9,7 @@ before_install:
 
 script:
     - invoke test
-    - pytest --cov=./
+    - pytest --cov=Mercado --cov=Portfolio tests/
 
 after_success:
     - codecov
