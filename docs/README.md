@@ -4,11 +4,11 @@
 
 <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [Índice de contenidos](#ndice-de-contenidos)
-- [Descripción](#descripcin)
+- [Índice de contenidos](#índice-de-contenidos)
+- [Descripción](#descripción)
 - [Arquitectura](#arquitectura)
-- [Tecnologías](#tecnologas)
-	- [Lenguaje de programación](#lenguaje-de-programacin)
+- [Tecnologías](#tecnologías)
+	- [Lenguaje de programación](#lenguaje-de-programación)
 	- [Base de datos](#base-de-datos)
 	- [Framework](#framework)
 	- [Servicios](#servicios)
