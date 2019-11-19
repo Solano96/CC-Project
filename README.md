@@ -8,13 +8,13 @@
 
 En este proyecto se va a crear una aplicación desplegable en la nube, que sirva de simulador de bolsa.  Esta aplicación permitirá crear ordenes de compra y venta en el mercado y poder llevar un registro de la cartera del usuario.
 
-### Arquitectura
+* **Arquitectura**
 
-La aplicación tendrá una arquitectura basada en microservicios. Para ver una descripción de la arquitectura en detalle se puede consultar el siguiente [enlace](https://solano96.github.io/CC-Project-Trading/#arquitectura).
+	La aplicación tendrá una arquitectura basada en microservicios. Para ver una descripción de la arquitectura en detalle se puede consultar el siguiente [enlace](https://solano96.github.io/CC-Project-Trading/#arquitectura).
 
-### Tecnologías
+* **Tecnologías**
 
-El proyecto será realizado en el lenguaje de programación **Python**, para ver más información acerca de las tecnologías puede consultar el siguiente [enlace](https://solano96.github.io/CC-Project-Trading/#tecnologías).
+	El proyecto será realizado en el lenguaje de programación **Python**, para ver más información acerca de las tecnologías puede consultar el siguiente [enlace](https://solano96.github.io/CC-Project-Trading/#tecnologías).
 
 ## Herramientas de construcción
 
@@ -42,3 +42,9 @@ Las tareas que se han definido son las siguientes:
 
 
 ## Integración continua
+
+Se han utilizado dos herramientas de integración continua, estas son las siguientes:
+
+* **Travis-CI**: ejecuta los tests unitarios y de cobertura sobre el sistema operativo Linux, para las versiones de Python 3.6, 3.6.8, 3.7 y 3.8 (el motivo de que la versión minima sea la 3.6 es debido a errores de ejecución en versiones anteriores con el paquete *yfinance*).  Tras finalizar la ejecución de los tests, se envían los resultados del test de cobertura a [codecov](https://codecov.io/gh/Solano96/CC-Project-Trading). En el fichero [.travis.yml](https://github.com/Solano96/CC-Project-Trading/blob/master/.travis.yml) se puede consultar la configuración descrita.
+
+* **Github Actions**: ejecuta los test unitarios y de cobertura en la última versión de Ubuntu, para las versiones de Python 3.6, 3.7 y 3.8. En el fichero [pythonapp.yml](https://github.com/Solano96/CC-Project-Trading/blob/master/.github/workflows/pythonapp.yml) se puede consultar la configuración descrita.
