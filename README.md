@@ -18,6 +18,10 @@ En este proyecto se va a crear una aplicación desplegable en la nube, que sirva
 
 ## Herramientas de construcción
 
+```
+buildtool: tasks.py
+```
+
 Como herramienta de construcción se ha añadido el fichero [tasks.py](https://github.com/Solano96/CC-Project-Trading/blob/master/tasks.py), para el cual es necesario instalar el paquete de python invoke, esto se puede lograr con el siguiente comando:
 
 ```
