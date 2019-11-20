@@ -1,7 +1,4 @@
-
-class PortfolioException(Exception):
-    pass
-
+from porfolioException import PortfolioException
 
 class Portfolio:
 
