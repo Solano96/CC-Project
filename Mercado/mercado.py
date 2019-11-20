@@ -7,9 +7,12 @@ class Mercado:
     @classmethod
     def get_data(cls, symbol, start, end, rounding=True):
         """
-        Get finance data from symbol
-        :param symbol: company symbol in yahoo finance
-        :return: data in json format
+        Obtener datos financieros de un mercado
+        :param symbol: símbolo del mercado en yahoo finance
+        :param start: fecha inicial desde donde se empezarán a obtener datos
+        .param end: fecha final hasta donde se obtendrán los datos
+        :param rounding: True si se desea redondear las cifras numéricas
+        :return: datos en formato JSON
         """
         df = yf.download(symbol, start=start, end=end, rounding=rounding)
         df.index = df.index.strftime('%Y-%m-%d')
@@ -17,6 +20,11 @@ class Mercado:
 
     @classmethod
     def get_data_in_realtime(cls, symbol):
+        """
+        Obtener información en tiempo real de un mercado
+        :param symbol: símbolo del mercado en yahoo finance
+        :return: datos en tiempo real en formato JSON
+        """
         ticker = yf.Ticker(symbol)
         info = ticker.info
         key = {'_id': symbol}
