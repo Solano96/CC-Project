@@ -5,7 +5,7 @@ import json
 class Mercado:
 
     @classmethod
-    def get_data(cls, symbol, start, end, rounding=True):
+    def get_data(cls, symbol, start=None, end=None, rounding=True):
         """
         Obtener datos financieros de un mercado
         :param symbol: símbolo del mercado en yahoo finance
@@ -19,7 +19,7 @@ class Mercado:
         return json.loads(df.to_json(orient='index',date_format='iso'))
 
     @classmethod
-    def get_data_in_realtime(cls, symbol):
+    def get_realtime_data(cls, symbol):
         """
         Obtener información en tiempo real de un mercado
         :param symbol: símbolo del mercado en yahoo finance
