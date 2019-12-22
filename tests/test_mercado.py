@@ -2,7 +2,7 @@ import pytest
 import sys
 sys.path.append('Mercado')
 
-from mercado import Mercado
+from Mercado.mercado import Mercado
 
 def test_get_data_1():
     data = Mercado.get_data('AAPL', '2019-11-04', '2019-11-16')
