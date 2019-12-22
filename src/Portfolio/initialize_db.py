@@ -3,6 +3,7 @@ from portfolio_db import PortfolioDB
 initial_user_doc = {
     '_id': 0,
     'dni': '00000000A',
+    'nombre': 'Nombre1',
     'saldo': 45,
     'acciones': {
         'AAPL': 10,
