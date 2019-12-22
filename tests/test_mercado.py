@@ -1,6 +1,6 @@
 import pytest
 import sys
-sys.path.append('Mercado')
+sys.path.append('src')
 
 from Mercado.mercado import Mercado
 
@@ -11,7 +11,7 @@ def test_get_data_1():
 
 
 def test_get_data_in_realtime():
-    data = Mercado.get_data_in_realtime('GOOGL')
+    data = Mercado.get_realtime_data('GOOGL')
     assert data['_id'] == 'GOOGL'
     assert data['shortName'] == "Alphabet Inc."
     assert type(data['regularMarketOpen']) is float
