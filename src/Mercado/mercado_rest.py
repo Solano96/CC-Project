@@ -1,14 +1,13 @@
 from flask import Flask, request
 from flask_cors import CORS
 from flask import Blueprint
-from mercado import Mercado
+from Mercado.mercado import Mercado
 
-app = Flask(__name__)
-CORS(app)
+bp_quote = Blueprint('quote', 'quote', url_prefix='/quote')
 
 mercado = Mercado
 
-@app.route('/<symbol>', methods=['GET'])
+@bp_quote.route('/<symbol>', methods=['GET'])
 def get_data(symbol):
     """
     Get finance data from symbol
@@ -18,11 +17,6 @@ def get_data(symbol):
     return mercado.get_data(symbol)
 
 
-@app.route('/realtime/<symbol>', methods=['GET'])
+@bp_quote.route('/realtime/<symbol>', methods=['GET'])
 def get_data_in_realtime(symbol):
     return mercado.get_realtime_data(symbol)
-
-
-if __name__ == '__main__':
-    app.debug = True
-    app.run()

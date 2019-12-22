@@ -1,94 +1,89 @@
 import pytest
 import sys
-sys.path.append('Portfolio')
+sys.path.append('src')
 
-from portfolio import Portfolio
-from portfolio import PortfolioException
+from Portfolio.portfolio import Portfolio
+from Portfolio.portfolioException import PortfolioException
+from Portfolio.portfolio_db import PortfolioDB
 
-
-def test_saldo_1():
-    portfolio_1 = Portfolio('123123', 'Francisco', 1500)
-    assert portfolio_1.consultar_saldo() == {'saldo': 1500}
+PortfolioDB.db_name = 'PortfolioTest'
 
 
-def test_saldo_2():
-    portfolio_1 = Portfolio('123123', 'Francisco', 1500)
-    portfolio_1.incrementar_saldo(35)
-    assert portfolio_1.consultar_saldo() == {'saldo': 1535}
+def clean_portfolio_test():
+    '''
+    Función para limpiar la base de datos del test
+    '''
+    database_info = PortfolioDB.get_db_collection('info')
+    key = {'_id': 'users'}
+    doc = {'_id': 'users', 'value': 0}
+    database_info.replace_one(key, doc, upsert=True)
+
+    collection = PortfolioDB.get_users_collection()
+    collection.delete_many({'_id': {'$gt': 0}})
 
 
-def test_saldo_3():
-    portfolio_1 = Portfolio('123123', 'Francisco', 1500)
-    portfolio_1.decrementar_saldo(55)
-    assert portfolio_1.consultar_saldo() == {'saldo': 1445}
+def test_portfolio():
+    '''
+    Función test de las operaciones asociadas al saldo del portfolio
+    '''
+    clean_portfolio_test()
+
+    with pytest.raises(PortfolioException, match="Error: DNI no encontrado."):
+        assert Portfolio('12345678X')
+
+    PortfolioDB.create_new_portfolio('12345678X', 'Nombre1')
+    user_portfolio = Portfolio('12345678X')
+
+    assert user_portfolio.consultar_datos_usuario() == {'dni': '12345678X', 'nombre': 'Nombre1'}
+    assert user_portfolio.consultar_saldo() == {'saldo': 0}
 
 
-def test_saldo_4():
-    portfolio_1 = Portfolio('123123', 'Francisco', 1500)
-    portfolio_1.incrementar_saldo(15)
-    portfolio_1.decrementar_saldo(26)
-    assert portfolio_1.consultar_saldo() == {'saldo': 1489}
+def test_saldo():
+    '''
+    Función test de las operaciones asociadas al saldo del portfolio
+    '''
+    clean_portfolio_test()
 
+    PortfolioDB.create_new_portfolio('12345678X', 'Nombre1')
+    user_portfolio = Portfolio('12345678X')
 
-def test_saldo_exception_1():
-    portfolio_1 = Portfolio('123123', 'Francisco', 100)
+    assert user_portfolio.consultar_saldo() == {'saldo': 0}
+    assert user_portfolio.incrementar_saldo(10) == {'saldo': 10}
+    assert user_portfolio.decrementar_saldo(3) == {'saldo': 7}
+    assert user_portfolio.consultar_saldo() == {'saldo': 7}
 
+    # Comprobacion de que no es posible restar mas saldo del disponible
     with pytest.raises(PortfolioException) as excinfo:
-        portfolio_1.decrementar_saldo(200)
+        user_portfolio.decrementar_saldo(200)
 
     excinfo.match("Error: saldo inferior a la cantidad a substraer.")
 
 
-def test_acciones_1():
-    portfolio_1 = Portfolio('123123', 'Francisco', 1500)
-    assert len(portfolio_1.consultar_acciones()) == 0
+def test_acciones():
+    '''
+    Función test de las operaciones asociadas a las acciones compradas
+    '''
+    clean_portfolio_test()
 
+    PortfolioDB.create_new_portfolio('12345678X', 'Nombre1')
+    user_portfolio = Portfolio('12345678X')
 
-def test_acciones_2():
-    portfolio_1 = Portfolio('123123', 'Francisco', 1500)
-    portfolio_1.aniadir_acciones_mercado('AAPL', 22)
-    portfolio_1.aniadir_acciones_mercado('GOOGL', 13)
-    portfolio_1.aniadir_acciones_mercado('GOOGL', 15)
+    assert user_portfolio.consultar_acciones() == {'acciones': {}}
+    assert user_portfolio.aniadir_acciones_mercado('AAPL', 15) == {'AAPL': 15}
+    assert user_portfolio.aniadir_acciones_mercado('AAPL', 15) == {'AAPL': 30}
+    assert user_portfolio.substraer_acciones_mercado('AAPL', 10) == {'AAPL': 20}
+    assert user_portfolio.consultar_acciones() == {'acciones': {'AAPL': 20}}
 
-    assert len(portfolio_1.consultar_acciones()) == 2
+    assert user_portfolio.aniadir_acciones_mercado('GOOGL', 15) == {'GOOGL': 15}
 
-    acciones_aapl = portfolio_1.consultar_acciones_mercado('AAPL')
-    assert acciones_aapl == {'AAPL': 22}
-
-    acciones_googl = portfolio_1.consultar_acciones_mercado('GOOGL')
-    assert acciones_googl == {"GOOGL": 28}
-
-
-def test_acciones_3():
-    portfolio_1 = Portfolio('123123', 'Francisco', 1500)
-    portfolio_1.aniadir_acciones_mercado('GOOGL', 22)
-    portfolio_1.substraer_acciones_mercado('GOOGL', 13)
-    portfolio_1.aniadir_acciones_mercado('GOOGL', 15)
-
-    assert len(portfolio_1.consultar_acciones()) == 1
-
-    acciones_googl = portfolio_1.consultar_acciones_mercado('GOOGL')
-
-    assert acciones_googl == {"GOOGL": 24}
-
-
-def test_acciones_exception_1():
-    portfolio_1 = Portfolio('123123', 'Francisco', 1500)
+    assert user_portfolio.consultar_acciones_mercado('AAPL') == {'AAPL': 20}
+    assert user_portfolio.consultar_acciones_mercado('GOOGL') == {'GOOGL': 15}
 
     with pytest.raises(PortfolioException, match="Error: No hay acciones compradas de este mercado."):
-        assert portfolio_1.consultar_acciones_mercado('AAPL')
-
-
-def test_acciones_exception_2():
-    portfolio_1 = Portfolio('123123', 'Francisco', 123)
+        assert user_portfolio.consultar_acciones_mercado('FB')
 
     with pytest.raises(PortfolioException, match="Error: No hay acciones compradas de este mercado."):
-        assert portfolio_1.substraer_acciones_mercado('AAPL', 20)
-
-
-def test_acciones_exception_3():
-    portfolio_1 = Portfolio('123123', 'Francisco', 123)
-    portfolio_1.aniadir_acciones_mercado('GOOGL', 22)
+        assert user_portfolio.substraer_acciones_mercado('FB', 20)
 
     with pytest.raises(PortfolioException, match="Error: no se pueden susbtraer más acciones de las que se disponen."):
-        assert portfolio_1.substraer_acciones_mercado('GOOGL', 30)
+        assert user_portfolio.substraer_acciones_mercado('GOOGL', 30)
