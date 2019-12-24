@@ -41,8 +41,10 @@ def clean(c):
 
     folders_to_delete = [".pytest_cache"]
     folders_to_delete.append("./tests/__pycache__")
-    folders_to_delete.append("./Portfolio/__pycache__")
-    folders_to_delete.append("./Mercado/__pycache__")
+    folders_to_delete.append("./src/__pycache__")
+    folders_to_delete.append("./src/Portfolio/__pycache__")
+    folders_to_delete.append("./src/Portfolio/.pytest_cache")
+    folders_to_delete.append("./src/Mercado/__pycache__")
 
     for f in files_to_delete:
         if os.path.isfile(f):
@@ -51,5 +53,7 @@ def clean(c):
     for d in folders_to_delete:
         if os.path.isdir(d):
             c.run("rm -r " + d)
+
+    c.run("rm -r src/Portfolio/portfolio_db.pyc")
 
     print("Limpieza finalizada.")
