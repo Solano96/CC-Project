@@ -12,8 +12,9 @@ initial_user_doc = {
 }
 
 if __name__ == '__main__':
-    database_info = PortfolioDB.get_db_collection('info')
+    portfolio_database = PortfolioDB(db_name = 'Portfolio', db_uri = 'localhost:27017')
+    database_info = portfolio_database.get_info_collection()
     database_info.insert_one({'_id': 'users', 'value': 0})
 
-    users_collection = PortfolioDB.get_users_collection()
+    users_collection = portfolio_database.get_user_portfolio()
     users_collection.insert_one(initial_user_doc)
