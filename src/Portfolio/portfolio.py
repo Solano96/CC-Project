@@ -5,7 +5,8 @@ import requests
 class Portfolio:
 
     def __init__(self, dni):
-        result = PortfolioDB.get_user_portfolio(dni)
+        self.portfolio_db = PortfolioDB()
+        result = self.portfolio_db.get_user_portfolio(dni)
 
         if len(result) > 0:
             self.user_portfolio = result[0]
@@ -36,7 +37,7 @@ class Portfolio:
         :return: saldo actualizado
         """
         self.user_portfolio['saldo'] += cantidad
-        PortfolioDB.update_user_portfolio(self.user_portfolio)
+        self.portfolio_db.update_user_portfolio(self.user_portfolio)
         return {'saldo': self.user_portfolio['saldo']}
 
 
@@ -50,7 +51,7 @@ class Portfolio:
             raise PortfolioException("Error: saldo inferior a la cantidad a substraer.")
         else:
             self.user_portfolio['saldo'] -= cantidad
-            PortfolioDB.update_user_portfolio(self.user_portfolio)
+            self.portfolio_db.update_user_portfolio(self.user_portfolio)
 
         return {'saldo': self.user_portfolio['saldo']}
 
@@ -87,7 +88,7 @@ class Portfolio:
         else:
             self.user_portfolio['acciones'][nombre_mercado] = num_acciones
 
-        PortfolioDB.update_user_portfolio(self.user_portfolio)
+        self.portfolio_db.update_user_portfolio(self.user_portfolio)
 
         return {nombre_mercado: self.user_portfolio['acciones'][nombre_mercado]}
 
@@ -107,7 +108,7 @@ class Portfolio:
         else:
             raise PortfolioException("Error: No hay acciones compradas de este mercado.")
 
-        PortfolioDB.update_user_portfolio(self.user_portfolio)
+        self.portfolio_db.update_user_portfolio(self.user_portfolio)
 
         return {nombre_mercado: self.user_portfolio['acciones'][nombre_mercado]}
 
