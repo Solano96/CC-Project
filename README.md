@@ -10,11 +10,11 @@ En este proyecto se va a crear una aplicación desplegable en la nube, que sirva
 
 * **Arquitectura**
 
-	La aplicación tendrá una arquitectura basada en microservicios. Para ver una descripción de la arquitectura en detalle se puede consultar el siguiente [enlace](docs/arquitectura.md).
+	La aplicación tendrá una arquitectura basada en microservicios. Para ver una descripción de la arquitectura en detalle se puede consultar el siguiente [enlace](https://solano96.github.io/CC-Project-Trading/docs/arquitectura).
 
 * **Tecnologías**
 
-	El proyecto será realizado en el lenguaje de programación **Python**, para ver más información acerca de las tecnologías puede consultar el siguiente [enlace](docs/tecnologias.md).
+	El proyecto será realizado en el lenguaje de programación **Python**, para ver más información acerca de las tecnologías puede consultar el siguiente [enlace](https://solano96.github.io/CC-Project-Trading/docs/tecnologias).
 
 ## Herramientas de construcción
 
@@ -47,4 +47,4 @@ Las tareas que se han definido son las siguientes:
 
 ## Integración continua
 
-Se han utilizado dos herramientas de integración continua **Travis-CI** y **Github Actions**, cuya documentación puede encontrarse en este [enlace](docs/integracion_continua.md).
+Se han utilizado dos herramientas de integración continua **Travis-CI** y **Github Actions**, cuya documentación puede encontrarse en este [enlace](https://solano96.github.io/CC-Project-Trading/docs/integracion_continua).
