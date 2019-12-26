@@ -23,10 +23,10 @@ def clean_portfolio_test(portfolio_test_db):
 
 @pytest.fixture(scope='session')
 def user_portfolio():
-    portfolio_test_db = PortfolioDB(db_name = 'Portfolio_test')
+    portfolio_test_db = PortfolioDB(db_name = 'PortfolioTest')
     clean_portfolio_test(portfolio_test_db)
     portfolio_test_db.create_new_portfolio('12345678X', 'Nombre1')
-    return Portfolio('12345678X', db_name = 'Portfolio_test')
+    return Portfolio(portfolio_test_db, '12345678X')
 
 
 def test_portfolio(user_portfolio):
@@ -34,7 +34,7 @@ def test_portfolio(user_portfolio):
     Función test de las operaciones asociadas al saldo del portfolio
     '''
     with pytest.raises(PortfolioException, match="Error: DNI no encontrado."):
-        assert Portfolio('12345678A')
+        assert Portfolio(PortfolioDB(db_name = 'PortfolioTest'), '12345678A')
 
     assert user_portfolio.consultar_datos_usuario() == {'dni': '12345678X', 'nombre': 'Nombre1'}
     assert user_portfolio.consultar_saldo() == {'saldo': 0}
@@ -60,13 +60,16 @@ def test_acciones(user_portfolio):
     '''
     Función test de las operaciones asociadas a las acciones compradas
     '''
+    assert user_portfolio.incrementar_saldo(100000) == {'saldo': 100007}
+
     assert user_portfolio.consultar_acciones() == {'acciones': {}}
-    assert user_portfolio.aniadir_acciones_mercado('AAPL', 15) == {'AAPL': 15}
-    assert user_portfolio.aniadir_acciones_mercado('AAPL', 15) == {'AAPL': 30}
-    assert user_portfolio.substraer_acciones_mercado('AAPL', 10) == {'AAPL': 20}
+    assert user_portfolio.comprar_acciones_mercado('AAPL', 15) == {'AAPL': 15}
+
+    assert user_portfolio.comprar_acciones_mercado('AAPL', 15) == {'AAPL': 30}
+    assert user_portfolio.vender_acciones_mercado('AAPL', 10) == {'AAPL': 20}
     assert user_portfolio.consultar_acciones() == {'acciones': {'AAPL': 20}}
 
-    assert user_portfolio.aniadir_acciones_mercado('GOOGL', 15) == {'GOOGL': 15}
+    assert user_portfolio.comprar_acciones_mercado('GOOGL', 15) == {'GOOGL': 15}
 
     assert user_portfolio.consultar_acciones_mercado('AAPL') == {'AAPL': 20}
     assert user_portfolio.consultar_acciones_mercado('GOOGL') == {'GOOGL': 15}
@@ -75,7 +78,7 @@ def test_acciones(user_portfolio):
         assert user_portfolio.consultar_acciones_mercado('FB')
 
     with pytest.raises(PortfolioException, match="Error: No hay acciones compradas de este mercado."):
-        assert user_portfolio.substraer_acciones_mercado('FB', 20)
+        assert user_portfolio.vender_acciones_mercado('FB', 20)
 
     with pytest.raises(PortfolioException, match="Error: no se pueden susbtraer más acciones de las que se disponen."):
-        assert user_portfolio.substraer_acciones_mercado('GOOGL', 30)
+        assert user_portfolio.vender_acciones_mercado('GOOGL', 30)

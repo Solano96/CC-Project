@@ -4,8 +4,8 @@ import requests
 
 class Portfolio:
 
-    def __init__(self, dni, db_name = 'Portfolio', db_uri = 'localhost:27017'):
-        self.portfolio_db = PortfolioDB(db_name, db_uri)
+    def __init__(self, portfolio_db, dni):
+        self.portfolio_db = portfolio_db
         result = self.portfolio_db.get_user_portfolio(dni)
 
         if len(result) > 0:
@@ -76,7 +76,7 @@ class Portfolio:
             raise PortfolioException("Error: No hay acciones compradas de este mercado.")
 
 
-    def aniadir_acciones_mercado(self, nombre_mercado, num_acciones):
+    def __aniadir_acciones_mercado(self, nombre_mercado, num_acciones):
         """
         Método para incremetar las acciones de un mercado
         :param nombre_mercado: nombre de un mercado
@@ -90,10 +90,8 @@ class Portfolio:
 
         self.portfolio_db.update_user_portfolio(self.user_portfolio)
 
-        return {nombre_mercado: self.user_portfolio['acciones'][nombre_mercado]}
 
-
-    def substraer_acciones_mercado(self, nombre_mercado, num_acciones):
+    def __substraer_acciones_mercado(self, nombre_mercado, num_acciones):
         """
         Método para decrementar las acciones de un mercado
         :param nombre_mercado: nombre de un mercado
@@ -110,21 +108,24 @@ class Portfolio:
 
         self.portfolio_db.update_user_portfolio(self.user_portfolio)
 
-        return {nombre_mercado: self.user_portfolio['acciones'][nombre_mercado]}
 
-    '''
     def comprar_acciones_mercado(self, nombre_mercado, num_acciones):
-        r = requests.get('http://127.0.0.1:5000/quote/realtime/'+nombre_mercado)
-        price = num_acciones*r.json()['regularMarketOpen']
+        # r = client.get(url+'/quote/realtime/'+nombre_mercado)
+        # price = num_acciones*r.json()['regularMarketOpen']
 
+        price = num_acciones*10
         self.decrementar_saldo(price)
         self.__aniadir_acciones_mercado(nombre_mercado, num_acciones)
 
+        return self.consultar_acciones_mercado(nombre_mercado)
+
 
     def vender_acciones_mercado(self, nombre_mercado, num_acciones):
-        r = requests.get('http://127.0.0.1:5000/quote/realtime/'+nombre_mercado)
-        price = num_acciones*r.json()['regularMarketOpen']
+        # r = client.get(url+'/quote/realtime/'+nombre_mercado)
+        # price = num_acciones*r.json()['regularMarketOpen']
 
+        price = num_acciones*10
         self.incrementar_saldo(price)
         self.__substraer_acciones_mercado(nombre_mercado, num_acciones)
-    '''
+
+        return self.consultar_acciones_mercado(nombre_mercado)
