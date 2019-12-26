@@ -14,7 +14,7 @@ En este proyecto se va a crear una aplicación desplegable en la nube, que sirva
 
 * **Tecnologías**
 
-	El proyecto será realizado en el lenguaje de programación **Python**, para ver más información acerca de las tecnologías puede consultar el siguiente [enlace](docs/tecnologías.md).
+	El proyecto será realizado en el lenguaje de programación **Python**, para ver más información acerca de las tecnologías puede consultar el siguiente [enlace](docs/tecnologias.md).
 
 ## Herramientas de construcción
 
