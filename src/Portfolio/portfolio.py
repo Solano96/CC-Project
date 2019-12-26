@@ -4,8 +4,8 @@ import requests
 
 class Portfolio:
 
-    def __init__(self, dni):
-        self.portfolio_db = PortfolioDB()
+    def __init__(self, dni, db_name = 'Portfolio', db_uri = 'localhost:27017'):
+        self.portfolio_db = PortfolioDB(db_name, db_uri)
         result = self.portfolio_db.get_user_portfolio(dni)
 
         if len(result) > 0:

@@ -15,6 +15,10 @@ class PortfolioDB:
         return self.users_collection
 
 
+    def get_info_collection(self):
+        return self.info_collection
+
+
     def get_user_portfolio(self, user_dni):
         result = self.users_collection.find({'dni': user_dni})
         return list(result)
