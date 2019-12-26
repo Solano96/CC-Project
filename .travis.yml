@@ -12,6 +12,7 @@ services:
     - mongodb
 
 before_install:
+    - pip install invoke
     - pip install -r requirements.txt
     - pip install codecov
 
