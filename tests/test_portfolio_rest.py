@@ -72,3 +72,6 @@ def test_portfolio_acciones(client):
 
     response = client.post('/portfolio/12345678A/vender-acciones', data=json.dumps({'symbol': 'SAN', 'cantidad':10}), content_type='application/json')
     assert json.loads(response.data.decode("utf-8")) == {'acciones': {'SAN': 15}}
+
+    response = client.get('/portfolio/12345678A/acciones/SAN')
+    assert json.loads(response.data.decode("utf-8")) == {'SAN': 15}
