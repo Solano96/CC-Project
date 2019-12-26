@@ -10,7 +10,7 @@ En este proyecto se va a crear una aplicación desplegable en la nube, que sirva
 
 * **Arquitectura**
 
-	La aplicación tendrá una arquitectura basada en microservicios. Para ver una descripción de la arquitectura en detalle se puede consultar el siguiente [enlace](https://solano96.github.io/CC-Project-Trading/#arquitectura).
+	La aplicación tendrá una arquitectura basada en microservicios. Para ver una descripción de la arquitectura en detalle se puede consultar el siguiente [enlace](docs/arquitectura.md).
 
 * **Tecnologías**
 
