@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, , Response
 from flask_cors import CORS
 from flask import Blueprint
 from Mercado.mercado_rest import bp_quote
@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.register_blueprint(bp_portfolio)
 
 @app.route("/")
-def ruta_inicio():
+def index():
     return Response("CC-Project-Trading - Simulador de bolsa", status=200)
 
 # Mercado endpoints
