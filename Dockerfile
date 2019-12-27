@@ -3,8 +3,6 @@ FROM python:3.6-slim
 # Información del desarrollador
 LABEL maintainer="Francisco Solano <fransol0728@correo.ugr.es>"
 
-ENV DB_URI="mongodb:27018"
-
 # Directorio de trabajo
 WORKDIR /src/
 
