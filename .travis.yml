@@ -11,6 +11,10 @@ python:
 services:
     - mongodb
 
+env:
+    global:
+    - DB_URI=localhost:27017
+
 before_install:
     - pip install invoke
     - pip install -r requirements.txt
