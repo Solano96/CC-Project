@@ -1,0 +1,13 @@
+api:
+  build: .
+  command: sh -c "python3 Portfolio/initialize_db.py && gunicorn server:app --bind 0.0.0.0:8000"
+  ports:
+    - "8000:8000"
+  volumes:
+    - .:/todo
+  links:
+    - mongodb
+mongodb:
+  image: mongo:3.0.2
+  ports:
+    - '27017:27017'

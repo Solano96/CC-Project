@@ -48,3 +48,10 @@ Las tareas que se han definido son las siguientes:
 ## Integración continua
 
 Se han utilizado dos herramientas de integración continua **Travis-CI** y **Github Actions**, cuya documentación puede encontrarse en este [enlace](https://solano96.github.io/CC-Project-Trading/docs/integracion_continua).
+
+
+## Docker
+
+La imagen de nuestro contenedor docker puede encontrarse en el siguiente enlace:
+
+https://hub.docker.com/r/fcosolano96/cc-project-trading

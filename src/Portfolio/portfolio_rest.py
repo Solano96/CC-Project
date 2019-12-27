@@ -2,14 +2,13 @@ import os
 os.environ['DB_NAME_PORTFOLIO'] = 'Portfolio'
 
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 from flask import Blueprint
 from Portfolio.portfolio import Portfolio
 from Portfolio.portfolio_db import PortfolioDB
 
 bp_portfolio = Blueprint('portfolio', 'portfolio', url_prefix='/portfolio')
 
-db_uri = 'localhost:27017'
+db_uri = os.environ['DB_URI']
 
 @bp_portfolio.route("/", methods=['GET'])
 def portfolio_inicio():
