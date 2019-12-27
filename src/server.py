@@ -10,7 +10,7 @@ app = Flask(__name__)
 # Porfolio endpoints
 app.register_blueprint(bp_portfolio)
 
-@app.route("/", methods=['GET'])
+@app.route("", methods=['GET'])
 def portfolio_inicio():
     return Response("CC-Project-Trading - Simulador de bolsa", status=200)
 
