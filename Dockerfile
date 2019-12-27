@@ -15,7 +15,7 @@ COPY src/ src/ requirements.txt ./
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Puerto donde va a escuchar el servidor
-EXPOSE 8000
+EXPOSE ${PORT}
 
 # Levantamos el servidor
-CMD gunicorn server:app --bind 0.0.0.0:8000
+CMD gunicorn server:app --bind 0.0.0.0:${PORT}
