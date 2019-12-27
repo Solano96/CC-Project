@@ -4,6 +4,7 @@ import json
 import os
 
 os.environ['DB_NAME_PORTFOLIO'] = 'PortfolioTest'
+os.environ['DB_URI'] = 'localhost:27017'
 
 sys.path.append('src')
 

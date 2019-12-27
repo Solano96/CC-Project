@@ -14,4 +14,3 @@ def test_get_data_in_realtime():
     data = Mercado.get_realtime_data('GOOGL')
     assert data['_id'] == 'GOOGL'
     assert data['shortName'] == "Alphabet Inc."
-    assert type(data['regularMarketOpen']) is float
