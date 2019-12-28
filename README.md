@@ -138,10 +138,25 @@ image-python-slim-stretch   1090.07              9.174 ms
 image-python-slim           1154.94              8.658 ms
 image-python                1195.66              8.364 ms
 ```
+
+### Imagen base elegida
+
+Observando los resultados anteriores la imagen base que elegimos finalmente es python:3.8-slim que a pesar de que ocupa algo más que python:3.7-slim-stretch, podemos apreciar que es algo mejor en cuanto al rendimiento obteniendo una cifra de 1154 peticiones por segundo. Para ver más detalles sobre la imagen que finalmente se ha construido se puede consulta el fihero [dockerfile](https://github.com/Solano96/CC-Project-Trading/blob/master/Dockerfile).
+
+
+### Docker-compose
+
+Se ha incluido el fichero adicionalmente el fichero [docker-compose.yml](https://github.com/Solano96/CC-Project-Trading/blob/master/docker-compose.yml) al proyecto, gracias al cual vamos a poder ejecutar multiples contenedores, en este caso el contenedor con nuestro proyecto y otro adicional para la base de datos con MongoDB. El motivo de este fichero es el de permitir que nuestro proyecto ejecutado en docker pueda acceder a la base de datos de mongoDB.
+
+Para iniciar y ejecutar toda nuestra aplicación con docker-compose tan solo debemos de ejecutar el comando `docker-compose up`. Para detener la ejecución ejecutaremos el comando `docker-compose down`.
+
+Para el uso de docker-compose se han seguido los pasos explicado en este [enlace](https://docs.docker.com/compose/) de la página oficial de docker.
+
+
 ## Heroku
 
-Podemos comprobar que la imagen está desplegada en Heroku accediento al siguiente enlace:
+Podemos comprobar que la imagen está desplegada en Heroku accediendo al siguiente enlace:
 
 https://cc-project-trading.herokuapp.com
 
-Para desplegar heroku se han seguido los pasos explicados en esta [guía](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml). Adicionalmente he creado una base de datos en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) y posteriormente he añadido a Heroku la URI de dicha base de datos como variable de entorno.
+Para desplegar heroku se han seguido los pasos explicados en esta [guía](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml). Adicionalmente he creado una base de datos en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) y posteriormente he añadido a Heroku la URI de dicha base de datos como variable de entorno, para lo cual he utilizado el comando `heroku config:set <VAR>=<VALUE>`.
