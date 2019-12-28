@@ -100,7 +100,7 @@ Se han utilizado dos herramientas de integración continua **Travis-CI** y **Git
 
 La imagen de nuestro contenedor docker puede encontrarse en el siguiente enlace:
 
-https://hub.docker.com/r/fcosolano96/cc-project-trading
+Contenedor: https://hub.docker.com/r/fcosolano96/cc-project-trading
 
 
 ### Comparación de imágenes
