@@ -1,7 +1,4 @@
-# FROM python:3.8
-# FROM python:3.8-slim
-# FROM python:3.7-slim-stretch
-FROM python:3.8-alpine
+FROM python:3.7-slim-stretch
 
 # Información del desarrollador
 LABEL maintainer="Francisco Solano <fransol0728@correo.ugr.es>"
@@ -11,9 +8,6 @@ WORKDIR /src/
 
 # Copiamos los archivos necesarios
 COPY src/ src/ requirements.txt ./
-
-# Necesario en alpine
-RUN apk --update add --no-cache g++
 
 # Instalamos las dependencias
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
