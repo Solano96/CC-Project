@@ -146,7 +146,7 @@ Observando los resultados anteriores la imagen base que elegimos finalmente es p
 
 ### Docker-compose
 
-Se ha incluido el fichero adicionalmente el fichero [docker-compose.yml](https://github.com/Solano96/CC-Project-Trading/blob/master/docker-compose.yml) al proyecto, gracias al cual vamos a poder ejecutar multiples contenedores, en este caso el contenedor con nuestro proyecto y otro adicional para la base de datos con MongoDB. El motivo de este fichero es el de permitir que nuestro proyecto ejecutado en docker pueda acceder a la base de datos de mongoDB.
+Se ha incluido el fichero [docker-compose.yml](https://github.com/Solano96/CC-Project-Trading/blob/master/docker-compose.yml) al proyecto, gracias al cual vamos a poder ejecutar multiples contenedores, en este caso el contenedor con nuestro proyecto y otro adicional para la base de datos con MongoDB. El motivo de este fichero es el de permitir que nuestro proyecto ejecutado en docker pueda acceder a la base de datos de mongoDB.
 
 Para iniciar y ejecutar toda nuestra aplicación con docker-compose tan solo debemos de ejecutar el comando `docker-compose up`. Para detener la ejecución ejecutaremos el comando `docker-compose down`.
 
@@ -159,4 +159,4 @@ Podemos comprobar que la imagen está desplegada en Heroku accediendo al siguien
 
 https://cc-project-trading.herokuapp.com
 
-Para desplegar heroku se han seguido los pasos explicados en esta [guía](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml). Adicionalmente he creado una base de datos en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) y posteriormente he añadido a Heroku la URI de dicha base de datos como variable de entorno, para lo cual he utilizado el comando `heroku config:set <VAR>=<VALUE>`.
+Para desplegar heroku se han seguido los pasos explicados en esta [guía](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml). Mencionar que Heroku usa por defecto un puerto como variable de entorno, debido a ello hemos puesto el puerto en el dockerfile como variable de entorno. Adicionalmente he creado una base de datos en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) y posteriormente he añadido a Heroku la URI de dicha base de datos como variable de entorno, para lo cual he utilizado el comando `heroku config:set <VAR>=<VALUE>`.
