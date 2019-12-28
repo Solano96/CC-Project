@@ -133,8 +133,15 @@ Los resultados son los que se muestran en la siguiente tabla:
 
 ```shell
 CONTAINER                   REQUEST PER SECOND   TIMER PER REQUEST            
-image-python-alpine         
+image-python-alpine         1102.32              9.072 ms
 image-python-slim-stretch   1090.07              9.174 ms
 image-python-slim           1154.94              8.658 ms
 image-python                1195.66              8.364 ms
 ```
+## Heroku
+
+Podemos comprobar que la imagen está desplegada en Heroku accediento al siguiente enlace:
+
+https://cc-project-trading.herokuapp.com
+
+Para desplegar heroku se han seguido los pasos explicados en esta [guía](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml). Adicionalmente he creado una base de datos en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) y posteriormente he añadido a Heroku la URI de dicha base de datos como variable de entorno.
