@@ -102,4 +102,17 @@ La imagen de nuestro contenedor docker puede encontrarse en el siguiente enlace:
 
 https://hub.docker.com/r/fcosolano96/cc-project-trading
 
-La imagen que hemos tomado como base se trata de python:3.6-slim
+
+### Comparación de imágenes
+
+En primer lugar vamos a comparar los tamaños de las imágenes. Lo primero que apreciamos es la gran diferencia de tamaño entre la versión de python original y la versión slim la cual ocupa mucho menos debido a que solo contiene los paquetes mínimos necesarios para ejecutar python.
+
+Las imágenes base utilizadas han sido las siguientes: python:3.8, python:3.8-slim, python:3.7-slim-stretch y python:3.8-alpine. Todos los dockerfiles utilizados para la construcción de dichas imágenes son idénticos a diferencia evidentemente de la línea en la que espedificamos la imagen base. También mencionar que en la imagen de alpine se ha debido de incluir la siguiente línea adicional `RUN apk --update add --no-cache g++` necesaria para poder instalar ciertos paquetes con pip.
+
+```shell
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+image-python-alpine         latest              1e2e8701fb2f        2 minutes ago       614MB
+image-python-slim-stretch   latest              0843ebfeae3a        25 minutes ago      303MB
+image-python-slim           latest              786c70f2b0ea        27 minutes ago      347MB
+image-python                latest              f4258a4f5fd9        29 minutes ago      1.09GB
+```

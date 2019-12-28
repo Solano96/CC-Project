@@ -8,7 +8,7 @@ def install(c):
     Función para instalar las dependencias del proyecto
     """
     print("Instalando paquetes...")
-    c.run("pip install -r requirements.txt")
+    c.run("pip3 install -r requirements.txt")
     print("Instalación finalizada.")
 
 
