@@ -3,11 +3,14 @@ web:
   command: sh -c "python3 Portfolio/initialize_db.py && gunicorn server:app --bind 0.0.0.0:8000"
   ports:
     - "8000:8000"
+  environment:
+    - DB_URI=mongodb://mongodb:27018
   volumes:
     - .:/todo
   links:
     - mongodb
 mongodb:
   image: mongo:3.0.2
+  command: mongod --port 27018
   ports:
     - '27018:27018'
