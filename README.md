@@ -83,6 +83,13 @@ Las tareas que se han definido son las siguientes:
 
 * **clean**: esta tarea se encarga de limpiar los archivos que se generan al ejecutar los test unitarios y los de cobertura.
 
+* **start**: esta tarea se encarga de levantar el servidor. Como parámetros se pueden especificar el host, el puerto y el uri de la base de datos. Ejemplo:
+
+	```
+	$ invoke start --host=0.0.0.0 --port=9000 --db=0.0.0.0:27017
+	```
+
+* **stop**: esta tarea se encarga de parar el servidor.
 
 ## Integración continua
 
@@ -94,3 +101,5 @@ Se han utilizado dos herramientas de integración continua **Travis-CI** y **Git
 La imagen de nuestro contenedor docker puede encontrarse en el siguiente enlace:
 
 https://hub.docker.com/r/fcosolano96/cc-project-trading
+
+La imagen que hemos tomado como base se trata de python:3.6-slim

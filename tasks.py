@@ -1,5 +1,6 @@
 from invoke import task, run
 import os
+import sys
 
 @task
 def install(c):
@@ -57,3 +58,14 @@ def clean(c):
     c.run("rm -r src/Portfolio/portfolio_db.pyc")
 
     print("Limpieza finalizada.")
+
+@task
+def start(c, host="0.0.0.0", port="8000", db = 'localhost:27017'):
+    sys.path.append('src')
+    os.environ['DB_URI'] = db
+    c.run("gunicorn server:app --bind " + host + ":" + port + " -p pid_server")
+
+@task
+def stop(c):
+    c.run('kill -9 $(cat pid_server)')
+    c.run('rm pid_server')
