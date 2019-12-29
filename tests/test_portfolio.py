@@ -49,7 +49,7 @@ def test_saldo(user_portfolio):
     assert user_portfolio.decrementar_saldo(3) == {'saldo': 7}
     assert user_portfolio.consultar_saldo() == {'saldo': 7}
 
-    # Comprobacion de que no es posible restar mas saldo del disponible
+    # Comprobación de que no es posible restar mas saldo del disponible
     with pytest.raises(PortfolioException) as excinfo:
         user_portfolio.decrementar_saldo(200)
 
