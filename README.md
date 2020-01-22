@@ -143,7 +143,7 @@ image-python                1195.66              8.364 ms
 
 ### Imagen base elegida
 
-Observando los resultados anteriores la imagen base que elegimos finalmente es python:3.8-slim que a pesar de que ocupa algo más que python:3.7-slim-stretch, podemos apreciar que es algo mejor en cuanto al rendimiento obteniendo una cifra de 1154 peticiones por segundo. Para ver más detalles sobre la imagen que finalmente se ha construido se puede consulta el fihero [dockerfile](https://github.com/Solano96/CC-Project-Trading/blob/master/Dockerfile).
+Observando los resultados anteriores la imagen base que elegimos finalmente es python:3.8-slim que a pesar de que ocupa algo más que python:3.7-slim-stretch, podemos apreciar que es algo mejor en cuanto al rendimiento obteniendo una cifra de 1154 peticiones por segundo. Para ver más detalles sobre la imagen que finalmente se ha construido se puede consulta el fichero [dockerfile](https://github.com/Solano96/CC-Project-Trading/blob/master/Dockerfile).
 
 ### Docker-compose
 

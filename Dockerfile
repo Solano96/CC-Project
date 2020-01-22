@@ -7,15 +7,14 @@ LABEL maintainer="Francisco Solano <fransol0728@correo.ugr.es>"
 WORKDIR /src/
 
 # Copiamos los archivos necesarios
-COPY src/ src/ requirements.txt ./
+COPY src/ requirements.txt ./
 
 # Instalamos las dependencias necesarias para el proyecto
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Definimos como argumentos el puerto por donde va a escuchar el servidor
 # y la uri de la base de datos
-# Puerto por defecto 8000
-ARG PORT=8000
+ARG PORT
 ARG DB_URI
 
 # Variables de entorno
