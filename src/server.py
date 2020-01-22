@@ -3,8 +3,9 @@ from flask_cors import CORS
 from flask import Blueprint
 from Mercado.mercado_rest import bp_quote
 from Portfolio.portfolio_rest import bp_portfolio
+import os
 
-puerto = '8000'
+puerto = os.environ['PORT']
 app = Flask(__name__)
 
 # Porfolio endpoints
