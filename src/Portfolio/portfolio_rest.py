@@ -1,6 +1,4 @@
 import os
-os.environ['DB_NAME_PORTFOLIO'] = 'Portfolio'
-
 from flask import Flask, request, jsonify
 from flask import Blueprint
 from Portfolio.portfolio import Portfolio
@@ -10,6 +8,8 @@ from Portfolio.portfolioException import PortfolioException
 bp_portfolio = Blueprint('portfolio', 'portfolio', url_prefix='/portfolio')
 
 db_uri = os.environ['DB_URI']
+os.environ['DB_NAME_PORTFOLIO'] = 'Portfolio'
+
 portfolio_db = PortfolioDB(os.environ['DB_NAME_PORTFOLIO'], db_uri)
 
 @bp_portfolio.route("/", methods=['GET'])
@@ -154,7 +154,7 @@ def vender_acciones(dni):
     :param dni: dni del usuario
     :return: lista de todas las acciones compradas tras realizar la operación
     """
-    
+
     try:
         user_portfolio = Portfolio(portfolio_db, dni)
     except PortfolioException:
