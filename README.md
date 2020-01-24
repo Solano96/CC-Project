@@ -80,14 +80,16 @@ Para la base de datos se ha utilizado el sistema de base de datos MongoDB. Para 
 
 #### Base de datos local
 
-Esta primera opción cosiste en instalar MongoDB en local y hacer uso de la base de datos instalada en nuestro propio equipo. Para la instalación de MongoDB en Ubuntu 18.04, podemos seguir los pasos de instalación que se encuentran en esta guía [instalación MongoDB](https://www.digitalocean.com/community/tutorials/como-instalar-mongodb-en-ubuntu-18-04-es).
+Esta primera opción consiste en instalar MongoDB en local y hacer uso de la base de datos instalada en nuestro propio equipo. Para la instalación de MongoDB en Ubuntu 18.04, podemos seguir los pasos de instalación que se encuentran en esta guía [instalación MongoDB](https://www.digitalocean.com/community/tutorials/como-instalar-mongodb-en-ubuntu-18-04-es).
 
 #### Base de datos con Docker
 
-Para esta opción podemos hacer uso del fichero docker-compose.yml, con el cual podemos ejecutar múltiples contenedores, en nuestro caso uno creado a partir del Dockerfile y otro a partir de una imagen con MongoDB. La imagen de MongoDB nos permitirá que el contenedor con nuestro microservicio pueda hacer uso del nuevo contenedor creado a partir de la imagen de MongoDB, para poder acceder a la base de datos.
+Para esta opción podemos hacer uso del fichero docker-compose.yml, con el cual podemos ejecutar múltiples contenedores, definiendo la arquitectura de nuestra aplicación como servicios individuales. Los servicios se pueden conectar entre sí. En nuestro caso uno de los contenedores será creado a partir del Dockerfile y otro a partir de una imagen con MongoDB. El primer contenedor mencionado será el correspondiente a nuestro microservicio, el cual dependerá de mongodb ya que usa este como base de datos, esto se especificará en el fichero docker-compose.yml mediante el uso de la configuración ```depends_on```.
 
-#### Base de datos Atlas
+Para ver más detalles sobre la configuración del fichero docker-compose.yml, puede consultar el siguiente [enlace](https://github.com/Solano96/CC-Project-Trading/blob/master/docker-compose.yml).
 
-Para poder hacer uso de la base de datos remota que nos proporciona [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), deberemos crearnos una cuenta en su página web. Tras registrarnos deberemos de crear un usuario de la base de datos y después crear una base de datos con dicho usuario. Por último para poder acceder a esta base de datos, deberemos obtener el uri accediento a Clusters > Connect > Connect your application, y copiar la cadena de texto que nos proporciona. Esta cadena deberemos usarla para la variable de entorno DB_URI y nos permitirá conectarnos a la base de datos remota que hemos creado.
+#### Base de datos remota con MongoDB Atlas
+
+Para poder hacer uso de la base de datos remota que nos proporciona [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), deberemos crearnos en primer lugar, una cuenta en su página web. Tras registrarnos deberemos crear un usuario de la base de datos y después crear una base de datos con dicho usuario. Por último para poder acceder a esta base de datos, deberemos obtener el uri accediento a Clusters > Connect > Connect your application, y copiar la cadena de texto que nos proporciona. Esta cadena deberemos usarla en la variable de entorno DB_URI y nos permitirá conectarnos a la base de datos remota que hemos creado.
 
 ## Evaluación de prestaciones
