@@ -1,6 +1,7 @@
 import yfinance as yf
 import pandas as pd
 import json
+from Mercado.mercadoException import MercadoException
 
 class Mercado:
 

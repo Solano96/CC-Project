@@ -1,0 +1,2 @@
+class MercadoException(Exception):
+    pass

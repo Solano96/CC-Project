@@ -10,14 +10,14 @@ app = Flask(__name__)
 
 # Porfolio endpoints
 app.register_blueprint(bp_portfolio)
+# Mercado endpoints
+app.register_blueprint(bp_quote)
 
 @app.route("/")
 def index():
-    return Response("CC-Project-Trading - Simulador de bolsa", status=200)
+    return jsonify({'message': 'CC-Project-Trading - Simulador de bolsa'}), 200
 
-# Mercado endpoints
-# app.register_blueprint(bp_quote)
-CORS(app)
+# CORS(app)
 
 if __name__ == '__main__':
     app.debug = True
