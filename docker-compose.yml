@@ -1,15 +1,13 @@
 # Version de docker compose
 version: "3"
-
+# Servicios
 services:
-
     # Contenedor para la base de datos mongodb
     mongodb:
         image: mongo:3.0.2
         command: mongod --port 27018
         ports:
             - '27018:27018'
-
     # Contenedor para el portfolio
     portfolio:
          # Nombre del contenedor
@@ -23,12 +21,14 @@ services:
                 PORT: 8000
                 DB_URI: "mongodb://mongodb:27018"
         # Comando con el que inicializamos la base de datos y desplegamos el servidor
-        command: sh -c "python3 Portfolio/initialize_db.py && gunicorn server:app --bind 0.0.0.0:8000"
+        command: sh -c "python3 Portfolio/initialize_db.py && gunicorn --workers=9 --worker-class eventlet server:app --bind 0.0.0.0:8000"
         # Variables de entorno
         environment:
             - PORT=8000
             - DB_URI=mongodb://mongodb:27018
+        # Puertos
         ports:
             - "8000:8000"
+        # portfolio depende de mongodb
         depends_on:
             - mongodb
