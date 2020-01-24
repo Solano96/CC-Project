@@ -1,0 +1,28 @@
+# Fichero para evaluación de prestaciones con Taurus:
+
+execution:
+    # Ejecucion con jmeter
+    - executor: jmeter
+      # 10 usuarios concurrentemente
+      concurrency: 10
+      # Tiempo que tardan en alcanzarse los 10 usuarios
+      ramp-up: 10s
+      # Duracion de la conexion de cada usuario
+      hold-for: 50s
+      # Se ejecutara el escenario portfolio-test
+      scenario: portfolio-test
+
+scenarios:
+    # Escenario para el Microservicio Portfolio
+    portfolio-test:
+      # Peticiones get al Microservicio Porfolio
+      requests:
+          # Peticion para obtener informacion de la cuenta del usuario
+        - url: http://127.0.0.1:8000/portfolio/00000000A
+          method: GET
+          # Peticion para obtener el saldo del usuario
+        - url: http://127.0.0.1:8000/portfolio/00000000A/saldo
+          method: GET
+          # Peticion para obtener las acciones compradas por el usuario
+        - url: http://127.0.0.1:8000/portfolio/00000000A/acciones
+          method: GET

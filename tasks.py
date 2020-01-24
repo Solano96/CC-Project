@@ -64,9 +64,11 @@ def start(c, host="0.0.0.0", port="8000", db = 'localhost:27017'):
     """
     Función para deplegar el servidor
     """
-    sys.path.append('src')
+    os.environ['PORT'] = port
     os.environ['DB_URI'] = db
-    c.run("gunicorn server:app --bind " + host + ":" + port + " -p pid_server")
+
+    with c.cd("src/"):
+        c.run("gunicorn --workers=9 --worker-class eventlet server:app --bind " + host + ":" + port + " -p pid_server")
 
 @task
 def stop(c):
