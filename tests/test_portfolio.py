@@ -23,7 +23,7 @@ def clean_portfolio_test(portfolio_test_db):
 
 @pytest.fixture(scope='session')
 def user_portfolio():
-    portfolio_test_db = PortfolioDB(db_name = 'PortfolioTest')
+    portfolio_test_db = PortfolioDB(os.environ['DB_NAME_PORTFOLIO'], os.environ['DB_URI'])
     clean_portfolio_test(portfolio_test_db)
     portfolio_test_db.create_new_portfolio('12345678X', 'Nombre1')
     return Portfolio(portfolio_test_db, '12345678X')
@@ -34,7 +34,7 @@ def test_portfolio(user_portfolio):
     Función test de las operaciones asociadas al saldo del portfolio
     '''
     with pytest.raises(PortfolioException, match="Error: DNI no encontrado."):
-        assert Portfolio(PortfolioDB(db_name = 'PortfolioTest'), '12345678A')
+        assert Portfolio(PortfolioDB(os.environ['DB_NAME_PORTFOLIO'], os.environ['DB_URI']), '12345678A')
 
     assert user_portfolio.consultar_datos_usuario() == {'dni': '12345678X', 'nombre': 'Nombre1'}
     assert user_portfolio.consultar_saldo() == {'saldo': 0}

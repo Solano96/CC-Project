@@ -20,6 +20,7 @@ ARG DB_URI
 # Variables de entorno
 ENV PORT=${PORT}
 ENV DB_URI=${DB_URI}
+ENV DB_NAME_PORTFOLIO='Portfolio'
 
 # Puerto donde va a escuchar el servidor
 EXPOSE ${PORT}

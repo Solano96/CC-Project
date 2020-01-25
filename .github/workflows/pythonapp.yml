@@ -17,6 +17,7 @@ jobs:
             ports:
             - 27017:27017
     env:
+        DB_NAME_PORTFOLIO: PortfolioTest
         DB_URI: localhost:27017
         PORT: 8000
 

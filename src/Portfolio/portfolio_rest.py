@@ -5,11 +5,8 @@ from Portfolio.portfolio import Portfolio
 from Portfolio.portfolio_db import PortfolioDB
 from Portfolio.portfolioException import PortfolioException
 
-
 bp_portfolio = Blueprint('portfolio', 'portfolio', url_prefix='/portfolio')
-
-db_uri = os.environ['DB_URI']
-portfolio_db = PortfolioDB('Portfolio', db_uri)
+portfolio_db = PortfolioDB(os.environ['DB_NAME_PORTFOLIO'], os.environ['DB_URI'])
 
 
 @bp_portfolio.route("/", methods=['GET'])
