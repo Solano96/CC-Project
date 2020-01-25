@@ -59,20 +59,34 @@ def clean(c):
 
     print("Limpieza finalizada.")
 
+
 @task
-def start(c):
+def start_market(c):
     """
-    Función para deplegar el servidor
+    Función para desplegar el microservicio mercado
     """
     with c.cd("src/"):
-        host = os.environ['HOST']
-        port = os.environ['PORT']
-        c.run("gunicorn --workers=9 --worker-class eventlet server:app --bind " + host + ":" + port + " -p pid_server")
+        host_market = os.environ['HOST_MARKET']
+        port_market = os.environ['PORT_MARKET']
+        c.run("gunicorn --workers=9 --worker-class eventlet Mercado.server:app --bind " + host_market + ":" + port_market + " -p pid_server_market")
+
+@task
+def start_portfolio(c):
+    """
+    Función para desplegar el microservicio portfolio
+    """
+    with c.cd("src/"):
+        host_portfolio = os.environ['HOST_PORTFOLIO']
+        port_portfolio = os.environ['PORT_PORTFOLIO']
+        c.run("gunicorn --workers=9 --worker-class eventlet Portfolio.server:app --bind " + host_portfolio + ":" + port_portfolio + " -p pid_server_portfolio")
 
 @task
 def stop(c):
     """
     Función para detener el servidor
     """
-    c.run('kill -9 $(cat pid_server)')
-    c.run('rm pid_server')
+    c.run('kill -9 $(cat src/pid_server_market)')
+    c.run('rm src/pid_server_market')
+
+    c.run('kill -9 $(cat src/pid_server_portfolio)')
+    c.run('rm src/pid_server_portfolio')

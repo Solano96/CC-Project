@@ -14,16 +14,16 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Definimos como argumentos el puerto por donde va a escuchar el servidor
 # y la uri de la base de datos
-ARG PORT
+ARG PORT_PORTFOLIO
 ARG DB_URI
 
 # Variables de entorno
-ENV PORT=${PORT}
+ENV PORT_PORTFOLIO=${PORT_PORTFOLIO}
 ENV DB_URI=${DB_URI}
 ENV DB_NAME_PORTFOLIO='Portfolio'
 
 # Puerto donde va a escuchar el servidor
-EXPOSE ${PORT}
+EXPOSE ${PORT_PORTFOLIO}
 
 # Levantamos el servidor
-CMD gunicorn --workers=9 --worker-class eventlet server:app --bind 0.0.0.0:${PORT}
+CMD gunicorn --workers=9 --worker-class eventlet Portfolio.server:app --bind 0.0.0.0:${PORT_PORTFOLIO}

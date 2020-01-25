@@ -104,5 +104,6 @@ venv.bak/
 .mypy_cache/
 
 # Scripts
-ejecutar_local.sh
+ejecutar_mercado_local.sh
+ejecutar_portfolio_local.sh
 ejecutar_docker.sh

@@ -18,15 +18,15 @@ services:
             context: .
             # Argumentos para la construcción
             args:
-                PORT: ${PORT}
+                PORT_PORTFOLIO: ${PORT_PORTFOLIO}
                 DB_URI: ${DB_URI}
         # Variables de entorno
         environment:
-            - PORT=${PORT}
+            - PORT_PORTFOLIO=${PORT_PORTFOLIO}
             - DB_URI=${DB_URI}
         # Puertos
         ports:
-            - "${PORT}:${PORT}"
+            - "${PORT_PORTFOLIO}:${PORT_PORTFOLIO}"
         # portfolio depende de mongodb
         depends_on:
             - mongodb

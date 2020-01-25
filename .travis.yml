@@ -15,7 +15,6 @@ env:
     global:
     - DB_NAME_PORTFOLIO=PortfolioTest
     - DB_URI=localhost:27017
-    - PORT=8000
 
 before_install:
     - pip install invoke

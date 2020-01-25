@@ -8,7 +8,7 @@ sys.path.append('src')
 from Portfolio.portfolio import Portfolio
 from Portfolio.portfolioException import PortfolioException
 from Portfolio.portfolio_db import PortfolioDB
-from server import app
+from Portfolio.server import app
 
 
 def init_portfolio_test():
