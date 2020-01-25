@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, Response
-from flask_cors import CORS
 from flask import Blueprint
 from Mercado.mercado_rest import bp_quote
 import os

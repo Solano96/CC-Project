@@ -2,10 +2,8 @@ pytest==5.2.2
 pytest-cov
 yfinance==0.1.50
 Flask==1.1.1
-Flask-Cors==3.0.8
 pymongo==3.10.0
 pymongo[srv]
 dnspython
 gunicorn==20.0.4
 eventlet==0.24.1
-gevent==1.4

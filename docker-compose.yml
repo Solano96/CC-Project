@@ -8,7 +8,7 @@ services:
         command: mongod --port 27018
         ports:
             - '27018:27018'
-    # Contenedor para el portfolio
+    # Contenedor para el microservicio portfolio
     portfolio:
          # Nombre del contenedor
         container_name: portfolio
@@ -30,3 +30,20 @@ services:
         # portfolio depende de mongodb
         depends_on:
             - mongodb
+    # Contenedor para el microservicio mercado
+    mercado:
+         # Nombre del contenedor
+        container_name: mercado
+        # Construccion del contenedor
+        build:
+            # Indicamos que el dockerfile se encuentra en el directorio Mercado
+            context: ./src/Mercado
+            # Argumentos para la construcción
+            args:
+                PORT_MARKET: ${PORT_MARKET}
+        # Variables de entorno
+        environment:
+            - PORT_MARKET=${PORT_MARKET}
+        # Puertos
+        ports:
+            - "${PORT_MARKET}:${PORT_MARKET}"

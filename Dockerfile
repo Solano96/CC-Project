@@ -11,8 +11,6 @@ COPY requirements.txt ./
 # Copiamos los archivos de la carpeta Portfolio
 COPY src/Portfolio ./Portfolio/
 
-RUN ls
-
 # Instalamos las dependencias necesarias para el proyecto
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
