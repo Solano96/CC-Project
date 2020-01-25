@@ -5,12 +5,12 @@ from Portfolio.portfolio import Portfolio
 from Portfolio.portfolio_db import PortfolioDB
 from Portfolio.portfolioException import PortfolioException
 
+
 bp_portfolio = Blueprint('portfolio', 'portfolio', url_prefix='/portfolio')
 
 db_uri = os.environ['DB_URI']
-os.environ['DB_NAME_PORTFOLIO'] = 'Portfolio'
+portfolio_db = PortfolioDB('Portfolio', db_uri)
 
-portfolio_db = PortfolioDB(os.environ['DB_NAME_PORTFOLIO'], db_uri)
 
 @bp_portfolio.route("/", methods=['GET'])
 def portfolio_inicio():
@@ -30,6 +30,7 @@ def consultar_info_usuario(dni):
         return jsonify(user_portfolio.consultar_datos_usuario()), 200
     except PortfolioException:
         return jsonify({'error': 'dni {} no encontrado en la base de datos.'.format(dni)}), 404
+
 
 @bp_portfolio.route("/<dni>/saldo", methods=['GET'])
 def consultar_saldo(dni):
@@ -168,3 +169,19 @@ def vender_acciones(dni):
         return jsonify({'error': 'no puedes vender acciones de las que no dispones.'}), 400
 
     return jsonify(user_portfolio.consultar_acciones())
+
+
+@bp_portfolio.route("/", methods=['POST'])
+def crear_portfolio():
+    content = request.json
+    dni = content['user_dni']
+    user_name = content['user_name']
+
+    portfolio_db.create_new_portfolio(content['user_dni'], content['user_name'])
+
+    try:
+        user_portfolio = Portfolio(portfolio_db, dni)
+        print("Usuario introducido")
+        return jsonify(user_portfolio.consultar_datos_usuario()), 200
+    except PortfolioException:
+        return jsonify({'error': 'dni {} no encontrado en la base de datos.'.format(dni)}), 404

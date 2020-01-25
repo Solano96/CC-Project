@@ -18,17 +18,15 @@ services:
             context: .
             # Argumentos para la construcción
             args:
-                PORT: 8000
-                DB_URI: "mongodb://mongodb:27018"
-        # Comando con el que inicializamos la base de datos y desplegamos el servidor
-        command: sh -c "python3 Portfolio/initialize_db.py && gunicorn --workers=9 --worker-class eventlet server:app --bind 0.0.0.0:8000"
+                PORT: ${PORT}
+                DB_URI: ${DB_URI}
         # Variables de entorno
         environment:
-            - PORT=8000
-            - DB_URI=mongodb://mongodb:27018
+            - PORT=${PORT}
+            - DB_URI=${DB_URI}
         # Puertos
         ports:
-            - "8000:8000"
+            - "${PORT}:${PORT}"
         # portfolio depende de mongodb
         depends_on:
             - mongodb

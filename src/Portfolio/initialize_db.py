@@ -27,7 +27,7 @@ initial_user_doc_2 = {
 if __name__ == '__main__':
     portfolio_database = PortfolioDB(db_name = 'Portfolio', db_uri = os.environ['DB_URI'])
     database_info = portfolio_database.get_info_collection()
-    database_info.replace_one({'_id': 'users'}, {'_id': 'users', 'value': 0}, upsert=True)
+    database_info.replace_one({'_id': 'users'}, {'_id': 'users', 'value': 1}, upsert=True)
 
     users_collection = portfolio_database.get_users_collection()
     users_collection.replace_one({'_id': 0}, initial_user_doc_1, upsert=True)

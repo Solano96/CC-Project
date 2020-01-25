@@ -60,14 +60,13 @@ def clean(c):
     print("Limpieza finalizada.")
 
 @task
-def start(c, host="0.0.0.0", port="8000", db = 'localhost:27017'):
+def start(c):
     """
     Función para deplegar el servidor
     """
-    os.environ['PORT'] = port
-    os.environ['DB_URI'] = db
-
     with c.cd("src/"):
+        host = os.environ['HOST']
+        port = os.environ['PORT']
         c.run("gunicorn --workers=9 --worker-class eventlet server:app --bind " + host + ":" + port + " -p pid_server")
 
 @task

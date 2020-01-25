@@ -25,4 +25,4 @@ ENV DB_URI=${DB_URI}
 EXPOSE ${PORT}
 
 # Levantamos el servidor
-# CMD gunicorn server:app --bind 0.0.0.0:${PORT}
+CMD gunicorn --workers=9 --worker-class eventlet server:app --bind 0.0.0.0:${PORT}

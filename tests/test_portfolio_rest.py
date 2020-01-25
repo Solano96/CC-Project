@@ -1,10 +1,6 @@
 import pytest
 import sys
 import json
-import os
-
-os.environ['DB_NAME_PORTFOLIO'] = 'PortfolioTest'
-os.environ['DB_URI'] = 'localhost:27017'
 
 sys.path.append('src')
 
@@ -15,7 +11,7 @@ from server import app
 
 
 def init_portfolio_test():
-    portfolio_test_db = PortfolioDB(db_name = os.environ['DB_NAME_PORTFOLIO'])
+    portfolio_test_db = PortfolioDB('PortfolioTest', os.environ['DB_URI'])
 
     database_info = portfolio_test_db.get_info_collection()
     key = {'_id': 'users'}
