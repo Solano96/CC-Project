@@ -12,7 +12,7 @@ from server import app
 
 
 def init_portfolio_test():
-    portfolio_test_db = PortfolioDB('PortfolioTest', os.environ['DB_URI'])
+    portfolio_test_db = PortfolioDB(os.environ['DB_NAME_PORTFOLIO'], os.environ['DB_URI'])
 
     database_info = portfolio_test_db.get_info_collection()
     key = {'_id': 'users'}
