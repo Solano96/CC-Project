@@ -73,3 +73,8 @@ def test_portfolio_acciones(client):
 
     response = client.get('/portfolio/12345678A/acciones/SAN')
     assert json.loads(response.data.decode("utf-8")) == {'SAN': 15}
+
+
+def test_portfolio_create(client):
+    response = client.post('/portfolio', data=json.dumps({'user_dni': '00000000A', 'user_name': 'Name'}))
+    assert json.loads(response.data.decode("utf-8")) == {'dni': '00000000A', 'nombre': 'Name'}

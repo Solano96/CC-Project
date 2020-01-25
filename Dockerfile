@@ -4,10 +4,14 @@ FROM python:3.7-slim-stretch
 LABEL maintainer="Francisco Solano <fransol0728@correo.ugr.es>"
 
 # Directorio de trabajo
-WORKDIR /src/
+WORKDIR /src
 
-# Copiamos los archivos necesarios
-COPY src/ requirements.txt ./
+# Copiamos el fichero de dependencias
+COPY requirements.txt ./
+# Copiamos los archivos de la carpeta Portfolio
+COPY src/Portfolio ./Portfolio/
+
+RUN ls
 
 # Instalamos las dependencias necesarias para el proyecto
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
