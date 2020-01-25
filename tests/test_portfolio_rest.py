@@ -76,5 +76,5 @@ def test_portfolio_acciones(client):
 
 
 def test_portfolio_create(client):
-    response = client.post('/portfolio', data=json.dumps({'user_dni': '00000000A', 'user_name': 'Name'}))
+    response = client.post('/portfolio/', data=json.dumps({'user_dni': '00000000A', 'user_name': 'Name'}), content_type='application/json')
     assert json.loads(response.data.decode("utf-8")) == {'dni': '00000000A', 'nombre': 'Name'}
