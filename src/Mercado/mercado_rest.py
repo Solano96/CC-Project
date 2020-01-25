@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 from flask import Blueprint
 from Mercado.mercado import Mercado
 from Mercado.mercadoException import MercadoException
