@@ -17,9 +17,9 @@ jobs:
             ports:
             - 27017:27017
     env:
-        DB_NAME_PORTFOLIO: PortfolioTest
-        DB_URI: localhost:27017
-        PORT: 8000
+        DB_NAME_PORTFOLIO: ${{ secrets.DB_NAME_PORTFOLIO }}
+        DB_URI: ${{ secrets.DB_URI }}
+        PORT: ${{ secrets.PORT }}
 
     steps:
     - uses: actions/checkout@v1
