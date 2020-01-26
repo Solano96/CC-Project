@@ -1,31 +1,37 @@
-# Fichero para evaluación de prestaciones con Taurus:
+# Fichero de evaluación de prestaciones con Taurus:
 execution:
-    - concurrency: 10   # 10 usuarios simultáneos
-      ramp-up: 10s    # En 10s se alcanzan los 10 usuarios
-      hold-for: 50s   # Cada usuario mantiene la conexión durante 50s
-      scenario: portfolio-test  # Nombre del test (escenario) a ejecutar
+    # 10 usuarios
+    - concurrency: 10
+      # Tiempo en el que se alcanzan los 10 usuarios
+      ramp-up: 10s
+      # Duración de la conexión 50 segundos
+      hold-for: 50s
+      # Nombre del escenario a ejecuta
+      scenario: portfolio-test
 
 # Ahora definimos el test/escenario a ejecutar:
 scenarios:
-    portfolio-test:
-        # Las peticiones que se harán:
+    portfolio-test
         requests:
-        # El POST solo se hará una vez por hebra (solo podemos tener un evento con el
-        # mismo título, por lo que solo una petición será correcta: la primera)
+        # Indicamos que el POST se ejecute una sola vez por hebra
         - once:
           - url: http://localhost:8080/portfolio/
             method: POST
-            # Indicamos que el contenido de la petición es un JSON
+            # Formato JSON
             headers:
               Content-Type: application/json
-            # En el cuerpo, indicamos los parámetros del JSON:
+            # Contenido de la petición
             body:
+              # DNI del usuario
               user_dni: "12345678X"
+              # Nombre del usuario
               user_name: "Francisco"
-        # Ahora hacemos dos peticiones GET: la primera es correcta, la segunda devuelve 404:
+        # Petición para obtener la información de un usuario
         - url: http://127.0.0.1:8080/portfolio/12345678X
           method: GET
+        # Petición para obtener el saldo de un usuario
         - url: http://127.0.0.1:8080/portfolio/12345678X/saldo
           method: GET
+        # Petición para obtener las acciones que un usuario tiene compradas
         - url: http://127.0.0.1:8080/portfolio/12345678X/acciones
           method: GET
