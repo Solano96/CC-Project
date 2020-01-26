@@ -1,5 +1,4 @@
 from Portfolio.portfolioException import PortfolioException
-from Portfolio.portfolio_db import PortfolioDB
 import requests
 
 class Portfolio:

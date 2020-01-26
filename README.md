@@ -90,6 +90,16 @@ Para ver más detalles sobre la configuración del fichero docker-compose.yml, p
 
 #### Base de datos remota con MongoDB Atlas
 
-Para poder hacer uso de la base de datos remota que nos proporciona [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), deberemos crearnos en primer lugar, una cuenta en su página web. Tras registrarnos deberemos crear un usuario de la base de datos y después crear una base de datos con dicho usuario. Por último para poder acceder a esta base de datos, deberemos obtener el uri accediento a Clusters > Connect > Connect your application, y copiar la cadena de texto que nos proporciona. Esta cadena deberemos usarla en la variable de entorno DB_URI y nos permitirá conectarnos a la base de datos remota que hemos creado.
+Para poder hacer uso de la base de datos remota que nos proporciona [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), deberemos crearnos en primer lugar, una cuenta en su página web. Tras registrarnos deberemos crear un cluster. Una vez tengamos lo anterior deberemos crear un usuario de la base de datos y después crear una base de datos con dicho usuario.
+
+![](docs/img/hito4/mongo_atlas.png)
+
+Por último para poder acceder a esta base de datos, deberemos obtener el uri accediento a Clusters > Connect > Connect your application, y copiar la cadena de texto que nos proporciona. Esta cadena deberemos usarla en la variable de entorno DB_URI y nos permitirá conectarnos a la base de datos remota que hemos creado. Como se puede ver en la imagen en la cadena que se nos proporciona, se debe sustituir password, por nuestra contraseña.
+
+![](docs/img/hito4/mongo_atlas_uri.png)
+
+#### Usando MongoDB en los microservicios
+
+Para que nuestros microservicios puedan interactuar con la base de datos en MongoDB desde Python, se va a utilizar PyMongo, una distribución de Python que contiene herramientas para trabajar con MongoDB. Para administrar la base de datos desde Python se ha creado una clase especifica que nos va a permitir realizar operaciones sobre la base de datos, dicha clase puede consultarse en el siguiente [enlace](https://github.com/Solano96/CC-Project-Trading/blob/master/src/Portfolio/portfolio_db.py). Se ha creado además otra clase que implementa la lógica del microservicio, a la cual se le inyecta directamente como atributo en el constructor, un objeto de la clase que administra la base de datos. De esta forma se consigue aplicar el patrón de inyección de dependencias, consiguiendo que la lógica del microservicio se despreocupe de como esté implementada la clase que accede a la base de datos.
 
 ## Evaluación de prestaciones
