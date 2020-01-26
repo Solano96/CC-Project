@@ -102,4 +102,27 @@ Por último para poder acceder a esta base de datos, deberemos obtener el uri ac
 
 Para que nuestros microservicios puedan interactuar con la base de datos en MongoDB desde Python, se va a utilizar PyMongo, una distribución de Python que contiene herramientas para trabajar con MongoDB. Para administrar la base de datos desde Python se ha creado una clase especifica que nos va a permitir realizar operaciones sobre la base de datos, dicha clase puede consultarse en el siguiente [enlace](https://github.com/Solano96/CC-Project-Trading/blob/master/src/Portfolio/portfolio_db.py). Se ha creado además otra clase que implementa la lógica del microservicio, a la cual se le inyecta directamente como atributo en el constructor, un objeto de la clase que administra la base de datos. De esta forma se consigue aplicar el patrón de inyección de dependencias, consiguiendo que la lógica del microservicio se despreocupe de como esté implementada la clase que accede a la base de datos.
 
+La integración de la base de datos supone realizar algunos cambios, que vamos a mostrar a continuación:
+
+- **Travis**: para que podamos acceder a la base de datos desde travis deberemos de añadir mongodb como servicio.
+
+	```
+	services:
+	    - mongodb
+	```
+
+	Además deberemos de añadir la variable de entorno DB_URI lo cual se puede hacer añadiéndolas directamente en el fichero .travis.yml, pero si lo hacemos de esta forma estaremos mostrando públicamente los valores de nuestra variable de entorno. En lugar de ello lo que se ha hecho es añadirla desde la página de travis.
+
+	![](docs/img/hito4/travis_env_var.png)
+
+- **GitHub Actions**: al igual que se hizo en travis, deberemos de añadir mongodb como servicio. También deberemos de añadir la variable de entorno DB_URI, pero en vez de hacerlo directamente, podemos añadir en GitHub secretos encriptados, que podemos utilizar como variable de entorno cifrada. Para conseguir esto se han seguido los pasos de esta [guía](https://help.github.com/es/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets). Para utilizar este secreto encriptado como variable de entorno, se han añadido en el fichero las siguientes líneas:
+
+	```
+	env:
+		DB_NAME_PORTFOLIO: ${{ secrets.DB_NAME_PORTFOLIO }}
+		DB_URI: ${{ secrets.DB_URI }}
+	```
+
+
+
 ## Evaluación de prestaciones
