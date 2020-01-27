@@ -43,6 +43,9 @@ def test_portfolio_dni(client):
     response = client.get('/portfolio/12345678A')
     assert json.loads(response.data.decode("utf-8")) == {'dni': '12345678A', 'nombre': 'Nombre1'}
 
+    response = client.get('/portfolio/DNIINCORRECTO')
+    assert response.status == '404 NOT FOUND'
+
 
 def test_portfolio_saldo(client):
     response = client.get('/portfolio/12345678A/saldo')
@@ -53,6 +56,15 @@ def test_portfolio_saldo(client):
 
     response = client.post('portfolio/12345678A/retirar-saldo', data=json.dumps({'cantidad': 10}), content_type='application/json')
     assert json.loads(response.data.decode("utf-8")) == {'saldo': 15}
+
+    response = client.get('/portfolio/DNIINCORRECTO/saldo')
+    assert response.status == '404 NOT FOUND'
+
+    response = client.post('portfolio/DNIINCORRECTO/ingresar-saldo', data=json.dumps({'cantidad': 25}), content_type='application/json')
+    assert response.status == '404 NOT FOUND'
+
+    response = client.post('portfolio/DNIINCORRECTO/retirar-saldo', data=json.dumps({'cantidad': 10}), content_type='application/json')
+    assert response.status == '404 NOT FOUND'
 
 
 def test_portfolio_acciones(client):
@@ -73,6 +85,15 @@ def test_portfolio_acciones(client):
 
     response = client.get('/portfolio/12345678A/acciones/SAN')
     assert json.loads(response.data.decode("utf-8")) == {'SAN': 15}
+
+    response = client.get('/portfolio/DNIINCORRECTO/acciones')
+    assert response.status == '404 NOT FOUND'
+
+    response = client.get('/portfolio/DNIINCORRECTO/acciones/SAN')
+    assert response.status == '404 NOT FOUND'
+
+    response = client.get('/portfolio/12345678A/acciones/NOEXISTE')
+    assert response.status == '404 NOT FOUND'
 
 
 def test_portfolio_create(client):
