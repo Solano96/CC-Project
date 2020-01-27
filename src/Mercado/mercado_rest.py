@@ -10,6 +10,9 @@ mercado = Mercado
 
 @bp_quote.route("/", methods=['GET'])
 def portfolio_inicio():
+    """
+    Ruta de inicio para el microservicio
+    """
     return jsonify({'Microservicio': 'Mercado'})
 
 

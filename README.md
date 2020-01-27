@@ -177,20 +177,30 @@ En el escenario portfolio test se han definido 4 peticiones, la primera de ellas
 
 #### Prueba 1
 
-La primera prueba ha sido realizada en local, con el
+La primera prueba ha sido realizada desplegando el microservicio con docker y haciendo uso de la base de datos remota de MongoAtlas.
 
 ![](docs/img/hito4/prestaciones_terminal_local_mongoatlas.png)
 
 ![](docs/img/hito4/prestaciones_web_local_mongoatlas.png)
 
+Como podemos ver el número de peticiones no llega ni siquiera a 50 por segundo. Cabe destacar que hacer uso de la base de datos remota repercute negativamente en el resultado, debido a que las prestaciones que nos ofrece esta base de datos de forma gratuita no son demasiadas.
+
 #### Prueba 2
+
+Esta prueba ha sido realizada completamente con docker, tanto el microservicio, como el uso de la base de datos.
 
 ![](docs/img/hito4/prestaciones_terminal_local_mipc.png)
 
 ![](docs/img/hito4/prestaciones_web_local_mipc.png)
 
+Como podemos comprobar al hacer uso de un contenedor con la base de datos, en lugar de la base de datos en remoto, las prestaciones mejoran considerablemente, llegando esta vez a cerca de las 800 peticiones por segundo.
+
 #### Prueba 3
+
+Esta prueba ha sido llevada a cabo de forma local, desplegando el servicio en local y utilizando también una base de datos local.
 
 ![](docs/img/hito4/prestaciones_terminal_local.jpg)
 
 ![](docs/img/hito4/prestaciones_web_local.jpg)
+
+Vemos como los resultados mejorar más aún si desplegamos el microservicio en local y además usamos una base de datos local, alcanzando más de 3000 peticiones por segundo.
