@@ -66,6 +66,9 @@ def test_portfolio_saldo(client):
     response = client.post('portfolio/DNIINCORRECTO/retirar-saldo', data=json.dumps({'cantidad': 10}), content_type='application/json')
     assert response.status == '404 NOT FOUND'
 
+    response = client.post('portfolio/12345678A/retirar-saldo', data=json.dumps({'cantidad': 100000}), content_type='application/json')
+    assert response.status == '400 BAD REQUEST'
+
 
 def test_portfolio_acciones(client):
     response = client.get('/portfolio/12345678A/acciones')
