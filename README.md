@@ -92,11 +92,11 @@ Para ver más detalles sobre la configuración del fichero docker-compose.yml, p
 
 Para poder hacer uso de la base de datos remota que nos proporciona [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), deberemos crearnos en primer lugar, una cuenta en su página web. Tras registrarnos deberemos crear un cluster. Una vez tengamos lo anterior deberemos crear un usuario de la base de datos y después crear una base de datos con dicho usuario.
 
-![](docs/img/hito4/mongo_atlas.png)
+![](docs/img/h4/mongo_atlas.png)
 
 Por último para poder acceder a esta base de datos, deberemos obtener el uri accediento a Clusters > Connect > Connect your application, y copiar la cadena de texto que nos proporciona. Esta cadena deberemos usarla en la variable de entorno DB_URI y nos permitirá conectarnos a la base de datos remota que hemos creado. Como se puede ver en la imagen en la cadena que se nos proporciona, se debe sustituir password, por nuestra contraseña.
 
-![](docs/img/hito4/mongo_atlas_uri.png)
+![](docs/img/h4/mongo_atlas_uri.png)
 
 #### Usando MongoDB en los microservicios
 
@@ -113,7 +113,7 @@ La integración de la base de datos supone realizar algunos cambios en la integr
 
 	Además deberemos de añadir la variable de entorno DB_URI lo cual se puede hacer añadiéndolas directamente en el fichero .travis.yml, pero si lo hacemos de esta forma estaremos mostrando públicamente los valores de nuestra variable de entorno. En lugar de ello lo que se ha hecho es añadirla desde la página de travis.
 
-	![](docs/img/hito4/travis_env_var.png)
+	![](docs/img/h4/travis_env_var.png)
 
 - **GitHub Actions**: al igual que se hizo en travis, deberemos de añadir mongodb como servicio. También deberemos de añadir la variable de entorno DB_URI, pero en vez de hacerlo directamente, podemos añadir en GitHub secretos encriptados, que podemos utilizar como variable de entorno cifrada. Para conseguir esto se han seguido los pasos de esta [guía](https://help.github.com/es/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets). Para utilizar este secreto encriptado como variable de entorno, se han añadido en el fichero las siguientes líneas:
 
@@ -181,9 +181,9 @@ En lo que viene a continuación, vamos a mostrar el resultado de 3 pruebas reali
 
 La primera prueba ha sido realizada desplegando el microservicio con docker y haciendo uso de la base de datos remota de MongoAtlas.
 
-![](docs/img/hito4/prestaciones_terminal_local_mongoatlas.png)
+![](docs/img/h4/prestaciones_terminal_local_mongoatlas.png)
 
-![](docs/img/hito4/prestaciones_web_local_mongoatlas.png)
+![](docs/img/h4/prestaciones_web_local_mongoatlas.png)
 
 Como podemos ver el número de peticiones no llega ni siquiera a 50 por segundo. Cabe destacar que hacer uso de la base de datos remota repercute negativamente en el resultado, debido a que las prestaciones que nos ofrece esta base de datos de forma gratuita no son demasiadas.
 
@@ -191,9 +191,9 @@ Como podemos ver el número de peticiones no llega ni siquiera a 50 por segundo.
 
 Esta prueba ha sido realizada completamente con docker, tanto el microservicio, como el uso de la base de datos.
 
-![](docs/img/hito4/prestaciones_terminal_local_mipc.png)
+![](docs/img/h4/prestaciones_terminal_local_mipc.png)
 
-![](docs/img/hito4/prestaciones_web_local_mipc.png)
+![](docs/img/h4/prestaciones_web_local_mipc.png)
 
 Como podemos comprobar al hacer uso de un contenedor con la base de datos, en lugar de la base de datos en remoto, las prestaciones mejoran considerablemente, llegando esta vez a cerca de las 800 peticiones por segundo.
 
@@ -201,8 +201,8 @@ Como podemos comprobar al hacer uso de un contenedor con la base de datos, en lu
 
 Esta prueba ha sido llevada a cabo de forma local, desplegando el servicio en local y utilizando también una base de datos local.
 
-![](docs/img/hito4/prestaciones_terminal_local.jpg)
+![](docs/img/h4/prestaciones_terminal_local.jpg)
 
-![](docs/img/hito4/prestaciones_web_local.jpg)
+![](docs/img/h4/prestaciones_web_local.jpg)
 
 Vemos como los resultados mejorar más aún si desplegamos el microservicio en local y además usamos una base de datos local, alcanzando más de 3000 peticiones por segundo.
