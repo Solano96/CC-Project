@@ -1,3 +1,4 @@
+# Dockerfile para el microservicio Mercado
 FROM python:3.7-slim-stretch
 
 # Información del desarrollador
@@ -22,5 +23,5 @@ ENV PORT_MARKET=${PORT_MARKET}
 # Puerto donde va a escuchar el servidor
 EXPOSE ${PORT_MARKET}
 
-# Levantamos el servidor
+# Levantamos el microservicio mercado
 CMD gunicorn --workers=9 --worker-class eventlet Mercado.server:app --bind 0.0.0.0:${PORT_MARKET}
