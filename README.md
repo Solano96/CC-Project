@@ -127,7 +127,53 @@ La integración de la base de datos supone realizar algunos cambios en la integr
 
 Prestaciones: performance_test.yml
 
-Para mejorar la prestaciones
+Para medir las prestaciones del microservicio vamos a utilizar la herramienta [Taurus](https://gettaurus.org). La evaluación de las prestaciones se va a realizar únicamente en el microservicio Portfolio. Para mejorar las prestaciones se han añadido algunas opciones en el uso de gunicorn:
+
+- --workers: mediante esta opción indicamos el número de procesos que se vana desplegar, en nuestro caso esta opción la hemos fijado a 9, ya que el número de procesos recomendado es igual a (2*CPU)+1 y en mi caso mi ordenador dispone de 4 núcleos.
+
+- --worker-class eventlet: mediante esta opcíon conseguirmos que los precesos se ejecuten de forma asíncrona.
+
+Configuración el fichero de prestaciones:
+
+```
+execution:
+    - concurrency: 10
+      ramp-up: 10s
+      hold-for: 50s
+      scenario: portfolio-test
+```
+
+Mediante la etiqueta concurrency indicamos el número de hilos concurrentes, que en nuestro caso se ha fijado a 10. Con la etiqueta ramp-up, la cual se ha fijado a 10s, indicamos el tiempo que tardan en alcanzarse los 10 hilos. Por otro lado con la etiqueta hold-for indicamos la duración de la conexión, para la cual hemos establecido un valor de 50 segundos. Por último con la etiqueta escenario indicamos el nombre del escenario que va a ejecutarse, en este caso portfolio-test.
+
+```
+scenarios:
+    portfolio-test
+        requests:
+        # Indicamos que el POST se ejecute una sola vez por hebra
+        - once:
+          - url: http://localhost:8080/portfolio/
+            method: POST
+            # Formato JSON
+            headers:
+              Content-Type: application/json
+            # Contenido de la petición
+            body:
+              # DNI del usuario
+              user_dni: "12345678X"
+              # Nombre del usuario
+              user_name: "Francisco"
+        # Petición para obtener la información de un usuario
+        - url: http://127.0.0.1:8080/portfolio/12345678X
+          method: GET
+        # Petición para obtener el saldo de un usuario
+        - url: http://127.0.0.1:8080/portfolio/12345678X/saldo
+          method: GET
+        # Petición para obtener las acciones que un usuario tiene compradas
+        - url: http://127.0.0.1:8080/portfolio/12345678X/acciones
+          method: GET
+```
+
+En el escenario portfolio test se han definido 4 peticiones, la primera de ellas se realiza únicamente una vez por hilo, (esto se consigue añadiendo la etiqueta once) realizando una petición POST, para la cual debemos de especificar el formato que va a tener el contenido de la petición, que en este caso será JSON, después se define el cuerpo de la petición, mediante la etiqueta body. Las 3 peticiones restantes se corresponden con peticiones GET.
 
 #### Prueba 1
 
