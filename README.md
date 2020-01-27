@@ -175,6 +175,8 @@ scenarios:
 
 En el escenario portfolio test se han definido 4 peticiones, la primera de ellas se realiza únicamente una vez por hilo, (esto se consigue añadiendo la etiqueta once) realizando una petición POST, para la cual debemos de especificar el formato que va a tener el contenido de la petición, que en este caso será JSON, después se define el cuerpo de la petición, mediante la etiqueta body. Las 3 peticiones restantes se corresponden con peticiones GET.
 
+En lo que viene a continuación, vamos a mostrar el resultado de 3 pruebas realizadas para la evaluación de las prestaciones, haciendo uso del fichoro de prestaciones que se acaba de explicar y utilizando la configuración de gunicorn que se ha comentado.
+
 #### Prueba 1
 
 La primera prueba ha sido realizada desplegando el microservicio con docker y haciendo uso de la base de datos remota de MongoAtlas.
