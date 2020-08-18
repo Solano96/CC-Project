@@ -46,7 +46,7 @@ En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
 	2. **/portfolio/< dni >** (GET): esta ruta devuelve información básica acerca del usuario con dicho dni y puede servir para comprobar que funciona el acceso a la base de datos y además que dicho usuario está registrado.
 
-	 	Ejemplo: `{"dni":"00000000A","nombre":"Francisco"}`
+		Ejemplo: `{"dni":"00000000A","nombre":"Francisco"}`
 
 	3. **/portfolio/< dni >/saldo** (GET): mediante esta petición podemos obtener el saldo en la cuenta.
 
