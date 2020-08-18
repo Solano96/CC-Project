@@ -42,13 +42,11 @@ En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
 	Las rutas definidas en el API REST Portfolio son las siguientes:
 
-	1. **/portfolio** (GET): ruta inicial con la que podemos comprobar que el microservicio está en funcionamiento y devueve lo siguiente:
+	1. **/portfolio** (GET): ruta inicial con la que podemos comprobar que el microservicio está en funcionamiento y devueve lo siguiente: `{'Microservicio': 'Portfolio'}`.
 
-	 	`{'Microservicio': 'Portfolio'}`.
+	2. **/portfolio/< dni >** (GET): esta ruta devuelve información básica acerca del usuario con dicho dni y puede servir para comprobar que funciona el acceso a la base de datos y además que dicho usuario está registrado.
 
-	2. **/portfolio/< dni >** (GET): esta ruta devuelve información básica acerca del usuario con dicho dni y puede servir para comprobar que funciona el acceso a la base de datos y además que dicho usuario está registrado. Este podría ser un ejemplo de lo que devolvería:
-
-	 	`{"dni":"00000000A","nombre":"Francisco"}`
+	 	Ejemplo: `{"dni":"00000000A","nombre":"Francisco"}`
 
 	3. **/portfolio/< dni >/saldo** (GET): mediante esta petición podemos obtener el saldo en la cuenta.
 
