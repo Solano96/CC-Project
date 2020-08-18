@@ -94,7 +94,7 @@ Para poder hacer uso de la base de datos remota que nos proporciona [MongoDB Atl
 
 ![](docs/img/h4/mongo_atlas.png)
 
-Por último para poder acceder a esta base de datos, deberemos obtener el uri accediento a Clusters > Connect > Connect your application, y copiar la cadena de texto que nos proporciona. Esta cadena deberemos usarla en la variable de entorno DB_URI y nos permitirá conectarnos a la base de datos remota que hemos creado. Como se puede ver en la imagen en la cadena que se nos proporciona, se debe sustituir password, por nuestra contraseña.
+Por último para poder acceder a esta base de datos, deberemos obtener el uri accediendo a `Clusters > Connect > Connect your application`, y copiar la cadena de texto que nos proporciona. Esta cadena deberemos usarla en la variable de entorno DB_URI y nos permitirá conectarnos a la base de datos remota que hemos creado. Como se puede ver en la imagen en la cadena que se nos proporciona, se debe sustituir password, por nuestra contraseña.
 
 ![](docs/img/h4/mongo_atlas_uri.png)
 
@@ -129,11 +129,11 @@ Prestaciones: performance_test.yml
 
 Para medir las prestaciones del microservicio vamos a utilizar la herramienta [Taurus](https://gettaurus.org). La evaluación de las prestaciones se va a realizar únicamente en el microservicio Portfolio. Para mejorar las prestaciones se han añadido algunas opciones en el uso de gunicorn:
 
-- --workers: mediante esta opción indicamos el número de procesos que se vana desplegar, en nuestro caso esta opción la hemos fijado a 9, ya que el número de procesos recomendado es igual a (2*CPU)+1 y en mi caso mi ordenador dispone de 4 núcleos.
+- --workers: mediante esta opción indicamos el número de procesos que se van a desplegar, en nuestro caso esta opción la hemos fijado a 9, ya que el número de procesos recomendado es igual a (2*CPU)+1 y en mi caso mi ordenador dispone de 4 núcleos.
 
-- --worker-class eventlet: mediante esta opcíon conseguirmos que los precesos se ejecuten de forma asíncrona.
+- --worker-class eventlet: mediante esta opción conseguimos que los procesos se ejecuten de forma asíncrona.
 
-Configuración el fichero de prestaciones:
+Configuración del fichero de prestaciones:
 
 ```
 execution:
@@ -143,7 +143,7 @@ execution:
       scenario: portfolio-test
 ```
 
-Mediante la etiqueta concurrency indicamos el número de hilos concurrentes, que en nuestro caso se ha fijado a 10. Con la etiqueta ramp-up, la cual se ha fijado a 10s, indicamos el tiempo que tardan en alcanzarse los 10 hilos. Por otro lado con la etiqueta hold-for indicamos la duración de la conexión, para la cual hemos establecido un valor de 50 segundos. Por último con la etiqueta escenario indicamos el nombre del escenario que va a ejecutarse, en este caso portfolio-test.
+Mediante la etiqueta _concurrency_ indicamos el número de hilos concurrentes, que en nuestro caso se ha fijado a 10. Con la etiqueta _ramp-up_, la cual se ha fijado a 10s, indicamos el tiempo que tardan en alcanzarse los 10 hilos. Por otro lado con la etiqueta _hold-for_ indicamos la duración de la conexión, para la cual hemos establecido un valor de 50 segundos. Por último con la etiqueta escenario indicamos el nombre del escenario que va a ejecutarse, en este caso _portfolio-test_.
 
 ```
 scenarios:
