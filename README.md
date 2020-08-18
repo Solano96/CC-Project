@@ -143,7 +143,7 @@ execution:
       scenario: portfolio-test
 ```
 
-Mediante la etiqueta _concurrency_ indicamos el número de hilos concurrentes, que en nuestro caso se ha fijado a 10. Con la etiqueta _ramp-up_, la cual se ha fijado a 10s, indicamos el tiempo que tardan en alcanzarse los 10 hilos. Por otro lado con la etiqueta _hold-for_ indicamos la duración de la conexión, para la cual hemos establecido un valor de 50 segundos. Por último con la etiqueta escenario indicamos el nombre del escenario que va a ejecutarse, en este caso _portfolio-test_.
+Mediante la etiqueta _concurrency_ indicamos el número de hilos concurrentes, que en nuestro caso se ha fijado a 10. Con la etiqueta _ramp-up_, la cual se ha fijado a 10s, indicamos el tiempo que tardan en alcanzarse los 10 hilos. Por otro lado con la etiqueta _hold-for_ indicamos la duración de la conexión, para la cual hemos establecido un valor de 50 segundos. Por último con la etiqueta _scenario_ indicamos el nombre del escenario que va a ejecutarse, en este caso _portfolio-test_.
 
 ```
 scenarios:
@@ -175,7 +175,7 @@ scenarios:
 
 En el escenario portfolio test se han definido 4 peticiones, la primera de ellas se realiza únicamente una vez por hilo, (esto se consigue añadiendo la etiqueta once) realizando una petición POST, para la cual debemos de especificar el formato que va a tener el contenido de la petición, que en este caso será JSON, después se define el cuerpo de la petición, mediante la etiqueta body. Las 3 peticiones restantes se corresponden con peticiones GET.
 
-En lo que viene a continuación, vamos a mostrar el resultado de 3 pruebas realizadas para la evaluación de las prestaciones, haciendo uso del fichoro de prestaciones que se acaba de explicar y utilizando la configuración de gunicorn que se ha comentado.
+En lo que viene a continuación, vamos a mostrar el resultado de 3 pruebas realizadas para la evaluación de las prestaciones, haciendo uso del fichero de prestaciones que se acaba de explicar y utilizando la configuración de gunicorn que se ha comentado.
 
 #### Prueba 1
 
@@ -185,7 +185,7 @@ La primera prueba ha sido realizada desplegando el microservicio con docker y ha
 
 ![](docs/img/h4/prestaciones_web_local_mongoatlas.png)
 
-Como podemos ver el número de peticiones no llega ni siquiera a 50 por segundo. Cabe destacar que hacer uso de la base de datos remota repercute negativamente en el resultado, debido a que las prestaciones que nos ofrece esta base de datos de forma gratuita no son demasiadas.
+Como podemos ver el número de peticiones no llega ni siquiera a 50 por segundo. Cabe destacar que hacer uso de la base de datos remota repercute negativamente en el resultado, debido a que las prestaciones que nos ofrece MongoAtlas de forma gratuita no son demasiado altas.
 
 #### Prueba 2
 
@@ -195,7 +195,7 @@ Esta prueba ha sido realizada completamente con docker, tanto el microservicio, 
 
 ![](docs/img/h4/prestaciones_web_local_mipc.png)
 
-Como podemos comprobar al hacer uso de un contenedor con la base de datos, en lugar de la base de datos en remoto, las prestaciones mejoran considerablemente, llegando esta vez a cerca de las 800 peticiones por segundo.
+Como podemos comprobar al hacer uso de un contenedor con la base de datos, en lugar de la base de datos remota, las prestaciones mejoran considerablemente, llegando esta vez a cerca de las 800 peticiones por segundo.
 
 #### Prueba 3
 
