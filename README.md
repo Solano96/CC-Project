@@ -106,6 +106,8 @@ Para que nuestros microservicios puedan interactuar con la base de datos en Mong
 
 Se ha creado además otra clase que implementa la lógica del microservicio, a la cual se le inyecta directamente como atributo en el constructor, un objeto de la clase que administra la base de datos. De esta forma se consigue aplicar el patrón de **inyección de dependencias**, consiguiendo que la lógica del microservicio se despreocupe de como esté implementada la clase que accede a la base de datos. Si por ejemplo en un futuro fuera necesario realizar algún cambio respecto al acceso a la base de datos, tan solo deberemos realizar modificaciones en la clase que hace de interfaz para la base de datos, mientras que la lógica del microservicio no debería ser alterada.
 
+##### MongoDB en Integración Continua
+
 La integración de la base de datos supone realizar algunos cambios en la integración continua, que vamos a mostrar a continuación:
 
 - **Travis**: para que podamos acceder a la base de datos desde travis deberemos de añadir mongodb como servicio.
