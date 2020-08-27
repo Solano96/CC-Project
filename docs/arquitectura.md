@@ -72,6 +72,6 @@ En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
 	1. **/quote** (GET): ruta inicial con la que podemos comprobar que el microservicio está en funcionamiento y devueve lo siguiente: `{'Microservicio': 'Mercado'}`.
 
-	2. **/quote/<symbol>** (GET): esta ruta devuelve un histórico de datos del mercado especificado que se especifique.
+	2. **/quote/< symbol >** (GET): esta ruta devuelve un histórico de datos del mercado especificado en < symbol >.
 
-	3. **/quote/realtime/<symbol>** (GET): esta ruta devuelve información en tiempo real del mercado que se especifique.
+	3. **/quote/realtime/< symbol >** (GET): esta ruta devuelve información en tiempo real del mercado especificado en < symbol >.
