@@ -32,13 +32,11 @@ En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
 * **Microservicio Portfolio**
 
-	La primera capa de este microservicio se encarga de administrar la base de datos Portfolio, permitiendo realizar operaciones sobre dicha base de datos y facilitando la implementación de la segunda capa.
+	Este microservicio se ha implementado siguiendo una estructura por capas. La primera capa de este microservicio se encarga de administrar la base de datos Portfolio, permitiendo realizar operaciones sobre dicha base de datos y facilitando la implementación de la segunda capa. La segunda capa se encarga de administrar la lógica del microservicio, aportando funcionalidades que permiten por ejemplo ingresar o retirar saldo de la cuenta o comprar y vender acciones. La última capa implementa el api rest, definiendo las rutas que nos permiten realizar peticiones al microservicio.
 
-	La segunda capa se encarga de administrar la lógica del microservicio, aportando funcionalidades que permiten por ejemplo ingresar o retirar saldo de la cuenta o comprar y vender acciones.
+	En la siguiente ilustración se muestra lo que se acaba de describir, para que se vea de forma más clara.
 
-	La última capa implementa el api rest, definiendo las rutas que nos permiten realizar peticiones al microservicio.
-
-	![](img/arquitecturaCapas.png)
+	![](img/arquitecturaCapasPortfolio.png)
 
 	Las rutas definidas en el API REST Portfolio son las siguientes:
 
@@ -62,6 +60,18 @@ En la siguiente ilustración podemos ver un diagrama de la arquitectura.
 
 	6. **/portfolio/< dni >/ingresar-saldo** o **/portfolio/< dni >/retirar-saldo** (POST): con esta petición POST podemos ingresar saldo o retirarlo de la cuenta asociada.
 
-	6. **/portfolio/< dni >/comprar-acciones** o **/portfolio/< dni >/vender-acciones** (POST): con esta petición POST podemos comprar o vender acciones con la cuenta asociada al dni.
+	7. **/portfolio/< dni >/comprar-acciones** o **/portfolio/< dni >/vender-acciones** (POST): con esta petición POST podemos comprar o vender acciones con la cuenta asociada al dni.
 
 * **Microservicio Mercado**
+
+	Este microservicio, al igual que el anterior, está implementado siguiendo una arquitectura por capas. En este caso se tienen 2 capas, una de ella implementa la lógica del microservicio y por otro lado tenemos el API REST, que hace uso de la capa anterior. En la siguiente ilustración se puede ver dicha estructura.
+
+	![](img/arquitecturaCapasMercado.png)
+
+	Las rutas definidas en el API REST Mercado son las siguientes:
+
+	1. **/quote** (GET): ruta inicial con la que podemos comprobar que el microservicio está en funcionamiento y devueve lo siguiente: `{'Microservicio': 'Mercado'}`.
+
+	2. **/quote/<symbol>** (GET): esta ruta devuelve un histórico de datos del mercado especificado que se especifique.
+
+	3. **/quote/realtime/<symbol>** (GET): esta ruta devuelve información en tiempo real del mercado que se especifique.
