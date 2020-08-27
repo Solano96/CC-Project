@@ -176,9 +176,6 @@ def crear_portfolio():
 
     portfolio_db.create_new_portfolio(content['user_dni'], content['user_name'])
 
-    try:
-        user_portfolio = Portfolio(portfolio_db, dni)
-        print("Usuario introducido")
-        return jsonify(user_portfolio.consultar_datos_usuario()), 200
-    except PortfolioException:
-        return jsonify({'error': 'dni {} no encontrado en la base de datos.'.format(dni)}), 404
+    user_portfolio = Portfolio(portfolio_db, dni)
+    print("Usuario introducido")
+    return jsonify(user_portfolio.consultar_datos_usuario()), 200
