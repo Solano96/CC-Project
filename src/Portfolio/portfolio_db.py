@@ -26,6 +26,11 @@ class PortfolioDB:
 
     def __get_sequence(self, name):
         document = self.info_collection.find_one_and_update({"_id": name}, {"$inc": {"value": 1}}, return_document=True)
+
+        if document == None:
+            self.info_collection.insert_one({"_id": name, "value": 0})
+            return 0
+
         return document["value"]
 
 
