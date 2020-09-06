@@ -12,7 +12,7 @@ COPY ./*.py ./Mercado/
 
 # Instalamos las dependencias necesarias para el proyecto
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir fix-yahoo-finance==0.1.30 Flask==1.1.1 dnspython==1.16.0 gunicorn==20.0.4 eventlet==0.25
+RUN pip install --no-cache-dir fix-yahoo-finance==0.1.30 Flask==1.1.1 dnspython==1.16.0 gunicorn==20.0.4 eventlet==0.24.1
 
 # Definimos como argumento el puerto por donde va a escuchar el servidor
 ARG PORT_MARKET
