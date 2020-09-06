@@ -1,5 +1,5 @@
 # Dockerfile para el microservicio Mercado
-FROM python:3.7-slim-stretch
+FROM python:3.6-slim-stretch
 
 # Información del desarrollador
 LABEL maintainer="Francisco Solano <fransol0728@correo.ugr.es>"
@@ -12,7 +12,7 @@ COPY ./*.py ./Mercado/
 
 # Instalamos las dependencias necesarias para el proyecto
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir yfinance==0.1.50 Flask==1.1.1 dnspython gunicorn==20.0.4 eventlet==0.24.1
+RUN pip install --no-cache-dir fix-yahoo-finance==0.1.30 Flask==1.1.1 dnspython==1.16.0 gunicorn==20.0.4 eventlet==0.25
 
 # Definimos como argumento el puerto por donde va a escuchar el servidor
 ARG PORT_MARKET

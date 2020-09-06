@@ -1,4 +1,4 @@
-import yfinance as yf
+import fix_yahoo_finance as yf
 import pandas as pd
 import json
 from Mercado.mercadoException import MercadoException
