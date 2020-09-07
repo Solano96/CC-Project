@@ -212,3 +212,60 @@ Esta prueba ha sido llevada a cabo de forma local, desplegando el servicio en lo
 ![](docs/img/h4/prestaciones_web_local.jpg)
 
 Vemos como los resultados mejorar más aún si desplegamos el microservicio en local y además usamos una base de datos local, alcanzando más de 3000 peticiones por segundo.
+
+
+## Despliegue y provisionamiento
+
+Para automatizar el despliegue del proyecto en máquinas virtuales se ha recurrido a Vagrant. La máquina se puede desplegar tanto en local, como en remoto con Azure. Con respecto al provisionamiento se ha recurrido a Ansible. Evidentemente para poder utilizar Vagrant y Ansible deberemos de instalarlas previamente.
+
+- Para el despliegue local necesitaremos tener instalado previamente VirtualBox y hacer uso del Vagranfile configurado para local. Para más detalle puede consultarse el fichero de configuración para la creación de la máquina virtual en local [Vagrant](https://github.com/Solano96/CC-Project-Trading/blob/master/provision_local/Vagrantfile).
+- Para el caso del despliegue en remoto con Azure, deberemos de crear una cuenta en Azure e instalar el plugins 'vagrant-azure' y posteriormente seguir los pasos de que vienen indicados en el repositorio de dicho plugins en el siguiente [enlace.](https://github.com/Azure/vagrant-azure). Para más detalle puede consultarse el fichero de configuración para la creación de la máquina virtual en remoto [Vagrant](https://github.com/Solano96/CC-Project-Trading/blob/master/provisionl/Vagrantfile). Para la creación de las máquinas virtuales en remoto necesitaremos definir las siguientes variables de entorno:
+
+```bash
+	AZURE_TENANT_ID: <tenant>
+	AZURE_CLIENT_ID: <appId>
+	AZURE_CLIENT_SECRET: <password>
+	AZURE_SUBSCRIPTION_ID: <id>
+```
+
+Los valores necesarios para estas variables podremos obtenerlos si seguimos la guía del repositorio de vagrant-azure mencionada anteriormente.
+
+El aprovisionamiento será realizado como ya se ha comentado con Ansible. Para ello recurriremos al uso de plybooks de Ansible. Las tareas que se han definido en el playbook son las siguientes:
+
+	# Servicio base de datos mongodb
+	# Iniciará la base de datos en caso de que no lo estuviera
+	# gracias al parámetro state con valor started
+	- name: MongoDB
+	  service:
+		name: mongod
+		state: started
+
+	# Contenedor para el microservicio Portfolio
+	- name: Microservicio Portfolio
+	  docker_container:
+		# Nombre del contenedor
+		name: Portfolio
+		# Imagen que se va a descargar de docker-hub
+		image: fcosolano96/cc-project-trading:latest
+		network_mode: host
+		detach: yes
+		# Variables de entorno necesarias
+		env:
+		  PORT_PORTFOLIO: "{{ PORT_PORTFOLIO }}"
+		  DB_URI: "{{ DB_URI }}"
+		  DB_NAME_PORTFOLIO: "{{ DB_NAME_PORTFOLIO }}"
+		ports:
+		  - "{{ PORT_PORTFOLIO }}:{{ PORT_PORTFOLIO }}"
+
+	# Contenedor para el microservicio Mercado
+	- name: Microservicio Mercado
+	  docker_container:
+		# Nombre del contenedor
+		name: Mercado
+		image: fcosolano96/cc-project-trading:latest_mercado
+		detach: yes
+		# Variables de entorno necesarias
+		env:
+		  PORT_MARKET: "{{ PORT_MARKET }}"
+		ports:
+		  - "{{ PORT_MARKET }}:{{ PORT_MARKET }}"
