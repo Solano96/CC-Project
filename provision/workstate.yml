@@ -1,0 +1,71 @@
+# Referencias
+# https://github.com/geerlingguy/ansible-role-docker
+# https://github.com/geerlingguy/ansible-role-fluentd/issues/3
+# https://github.com/geerlingguy/ansible-role-docker/issues/168
+
+- hosts: azure
+
+  # Activar la escalada de privilegios
+  become: yes
+
+  # Actualizar la caché de los repositorios
+  pre_tasks:
+    - name: Update repositories cache
+      apt:
+        update_cache: yes
+
+  # Incluir archivos de variables
+  vars_files:
+    # Archivo con variables de entorno
+    - "{{ env_file }}"
+
+  vars:
+    pip_install_packages:
+      - name: docker
+  # Usamos un rol para instalar docker
+  # Se puede consultar más sobre este rol en el siguiente enlace:
+  # https://github.com/geerlingguy/ansible-role-docker
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.docker
+    - enix.mongodb
+
+  tasks:
+
+    # Servicio base de datos mongodb
+    # Iniciará la base de datos en caso de que no lo estuviera
+    # gracias al parámetro state con valor started
+    - name: MongoDB
+      service:
+        name: mongod
+        state: started
+
+    # Contenedor para el microservicio Portfolio
+    - name: Microservicio Portfolio
+      docker_container:
+        # Nombre del contenedor
+        name: Portfolio
+        # Imagen que se va a descargar de docker-hub
+        image: fcosolano96/cc-project-trading:latest
+        network_mode: host
+        detach: yes
+        # Variables de entorno necesarias
+        env:
+          PORT_PORTFOLIO: "{{ PORT_PORTFOLIO }}"
+          DB_URI: "{{ DB_URI }}"
+          DB_NAME_PORTFOLIO: "{{ DB_NAME_PORTFOLIO }}"
+        ports:
+          - "{{ PORT_PORTFOLIO }}:{{ PORT_PORTFOLIO }}"
+
+    # Contenedor para el microservicio Mercado
+    - name: Microservicio Mercado
+      docker_container:
+        # Nombre del contenedor
+        name: Mercado
+        image: fcosolano96/cc-project-trading:latest_mercado
+        detach: yes
+        # Variables de entorno necesarias
+        env:
+          PORT_MARKET: "{{ PORT_MARKET }}"
+        ports:
+          - "{{ PORT_MARKET }}:{{ PORT_MARKET }}"
