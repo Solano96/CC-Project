@@ -110,3 +110,4 @@ ejecutar_portfolio_local.sh
 ejecutar_docker.sh
 
 provision/.vagrant
+provision_local/.vagrant
