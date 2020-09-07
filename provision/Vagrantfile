@@ -25,43 +25,6 @@ opts.each do |opt, arg|
 end
 
 
-# ------------------------ VAGRANTFILE LOCAL ------------------------
-# -------------------------------------------------------------------
-
-=begin
-
-# El dos indica la versión de la configuración
-Vagrant.configure("2") do |config|
-
-    # Ahora tenemos que indicar que box queremos usar
-    # Esto es el SO base que queremos que tenga nuestra máquina virtual
-    config.vm.box = "ubuntu/bionic64"
-
-    # Configuramos que puertos del host van a acceder a la máquina virtual
-    config.vm.network "forwarded_port", guest: 8000, host: 8000
-    config.vm.network "forwarded_port", guest: 8080, host: 8080
-
-    config.vm.provider "virtualbox" do |virtualbox|
-        virtualbox.memory = 2048
-        virtualbox.cpus = 2
-    end
-
-    # Aprovisionamos la máquina virtual con Ansible
-    config.vm.provision "ansible" do |ansible|
-        ansible.verbose="vvv"
-        ansible.inventory_path = "./ansible_hosts"
-        ansible.limit="vagrantlocal"
-        ansible.playbook = "./workstate.yml"
-        # Fichero con las variables de entorno
-        ansible.extra_vars = {
-          env_file: "#{env_file}",
-        }
-    end
-
-end
-
-=end
-
 # ------------------------ VAGRANTFILE AZURE ------------------------
 # -------------------------------------------------------------------
 
