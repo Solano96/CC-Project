@@ -1,0 +1,24 @@
+# Fichero de evaluación de prestaciones con Taurus:
+execution:
+    # 10 usuarios
+    - concurrency: 10
+      # Tiempo en el que se alcanzan los 10 usuarios
+      ramp-up: 10s
+      # Duración de la conexión 50 segundos
+      hold-for: 50s
+      # Nombre del escenario a ejecuta
+      scenario: portfolio-test
+
+# Ahora definimos el test/escenario a ejecutar:
+scenarios:
+    portfolio-test:
+        requests:
+        # Petición para obtener la información de un usuario
+        - url: http://cc-project-trading.westus.cloudapp.azure.com:8080/portfolio/12345678X
+          method: GET
+        # Petición para obtener el saldo de un usuario
+        - url: http://cc-project-trading.westus.cloudapp.azure.com:8080/portfolio/12345678X/saldo
+          method: GET
+        # Petición para obtener las acciones que un usuario tiene compradas
+        - url: http://cc-project-trading.westus.cloudapp.azure.com:8080/portfolio/12345678X/acciones
+          method: GET

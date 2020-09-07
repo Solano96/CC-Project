@@ -1,0 +1,21 @@
+# Fichero de evaluación de prestaciones con Taurus:
+execution:
+    # 10 usuarios
+    - concurrency: 10
+      # Tiempo en el que se alcanzan los 10 usuarios
+      ramp-up: 10s
+      # Duración de la conexión 50 segundos
+      hold-for: 50s
+      # Nombre del escenario a ejecuta
+      scenario: market-test
+
+# Ahora definimos el test/escenario a ejecutar:
+scenarios:
+    market-test:
+        requests:
+        # Petición para obtener comprobar que el microservico esta funcionando
+        - url: http://cc-project-trading.westus.cloudapp.azure.com:8000/quote
+          method: GET
+        # Petición para obtener datos en tiempo real de acciones AAPL
+        - url: http://cc-project-trading.westus.cloudapp.azure.com:8000/quote/realtime/AAPL
+          method: GET
