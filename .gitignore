@@ -89,6 +89,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+env-file.yml
 
 # Spyder project settings
 .spyderproject
@@ -107,3 +108,5 @@ venv.bak/
 ejecutar_mercado_local.sh
 ejecutar_portfolio_local.sh
 ejecutar_docker.sh
+
+provision/.vagrant

@@ -1,0 +1,108 @@
+# Parser de argumentos en línea de comandos
+require 'getoptlong'
+
+# Definimos las opciones posibles
+# --env-file: para indicar la ruta del fichero de variables de entorno
+# --help: mostrar ayuda acerca de la opción anterior
+# Ha sido necesario poner --provider y --provision para que no de error
+# al usarlos.
+opts = GetoptLong.new(
+  [ '--env-file', GetoptLong::OPTIONAL_ARGUMENT ],
+  [ '--provider', GetoptLong::OPTIONAL_ARGUMENT ],
+  [ '--provision', GetoptLong::OPTIONAL_ARGUMENT ],
+  [ '--help', GetoptLong::OPTIONAL_ARGUMENT ]
+)
+
+env_file=''
+
+opts.each do |opt, arg|
+  case opt
+  when '--env-file'
+      env_file=arg
+  when '--help'
+      puts "Haz uso de la opción --env-file para indicar la ruta del fichero de variables de entorno"
+  end
+end
+
+
+# ------------------------ VAGRANTFILE LOCAL ------------------------
+# -------------------------------------------------------------------
+
+=begin
+
+# El dos indica la versión de la configuración
+Vagrant.configure("2") do |config|
+
+    # Ahora tenemos que indicar que box queremos usar
+    # Esto es el SO base que queremos que tenga nuestra máquina virtual
+    config.vm.box = "ubuntu/bionic64"
+
+    # Configuramos que puertos del host van a acceder a la máquina virtual
+    config.vm.network "forwarded_port", guest: 8000, host: 8000
+    config.vm.network "forwarded_port", guest: 8080, host: 8080
+
+    config.vm.provider "virtualbox" do |virtualbox|
+        virtualbox.memory = 2048
+        virtualbox.cpus = 2
+    end
+
+    # Aprovisionamos la máquina virtual con Ansible
+    config.vm.provision "ansible" do |ansible|
+        ansible.verbose="vvv"
+        ansible.inventory_path = "./ansible_hosts"
+        ansible.limit="vagrantlocal"
+        ansible.playbook = "./workstate.yml"
+        # Fichero con las variables de entorno
+        ansible.extra_vars = {
+          env_file: "#{env_file}",
+        }
+    end
+
+end
+
+=end
+
+# ------------------------ VAGRANTFILE AZURE ------------------------
+# -------------------------------------------------------------------
+
+# Importamos el pluging 'vagrant-azure' que agrega el proveedor de Microsoft Azure a Vagrant,
+# lo que permite a Vagrant controlar y aprovisionar máquinas en Microsoft Azure.
+# Casi toda la configuración de este fichero se ha definido siguiendo
+# los pasos de: https://github.com/Azure/vagrant-azure
+require 'vagrant-azure'
+
+Vagrant.configure('2') do |config|
+  config.vm.box = 'azure'
+
+  # Usamos clave ssh para conectar a vagrant box remoto
+  config.ssh.private_key_path = '~/.ssh/id_rsa'
+  config.vm.provider :azure do |azure, override|
+
+    # Variables de entorno necesarias para azure
+    azure.tenant_id = ENV['AZURE_TENANT_ID']
+    azure.client_id = ENV['AZURE_CLIENT_ID']
+    azure.client_secret = ENV['AZURE_CLIENT_SECRET']
+    azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+
+    # Especificamos valores para la máquina virtual
+    # Nombre de la máquina virtual
+    azure.vm_name = 'cc-project-trading'
+    azure.resource_group_name = 'vagrantcctrading'
+    azure.vm_size = 'Standard_B2s'
+    # Sistema Operativo de la máquina virtual
+    azure.vm_image_urn = 'Canonical:UbuntuServer:18.04-LTS:latest'
+    # Configuramos que puertos
+    azure.tcp_endpoints = [8000, 8080]
+  end
+
+  # Aprovisionamos la máquina virtual con Ansible
+  config.vm.provision "ansible" do |ansible|
+      ansible.inventory_path = "./ansible_hosts"
+      ansible.limit="vagrantazure"
+      ansible.playbook = "./workstate.yml"
+      # Fichero con las variables de entorno
+      ansible.extra_vars = {
+        env_file: "#{env_file}",
+      }
+  end
+end
